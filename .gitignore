@@ -11,3 +11,5 @@ dist/
 tests/fixtures/rss/krazycouponlady.xml
 circulars/*.pdf
 circulars/*.html
+.chromium-profile-walmart/
+circulars/walmart.last-attempt.html

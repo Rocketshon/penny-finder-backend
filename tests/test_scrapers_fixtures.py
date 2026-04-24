@@ -70,4 +70,7 @@ def test_scraper_returns_ok_false_on_fetch_failure(monkeypatch):
     monkeypatch.setattr(dollar_general, "safe_get", none_get)
     res = _run(dollar_general.fetch)
     assert res.source.ok is False
-    assert res.highlights == []
+    # Calendar-based weekly penny signal still emits even when the URL is down.
+    assert any(h.event == "penny_day" for h in res.highlights)
+    # But dynamic fetch-dependent highlights (markdown signals) should not appear.
+    assert not any(h.event == "markdown_cycle" for h in res.highlights)

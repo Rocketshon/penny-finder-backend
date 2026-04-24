@@ -2,10 +2,10 @@
   "schema": 1,
   "week_id": "2026-W17",
   "week_of": "2026-04-20",
-  "generated_at": "2026-04-24T13:58:52+00:00",
+  "generated_at": "2026-04-24T14:45:23+00:00",
   "hunt_index": 100,
   "peak_day": "sun",
-  "headline": "Dollar general penny day tuesday. Dollar general dollar general penny list · 84 upcs tuesday. Aldi flipp circular · 72 deals sunday.",
+  "headline": "Dollar general penny day tuesday. Dollar general dollar general penny list · 84 upcs tuesday. Aldi this week's deals · 72 sunday.",
   "highlights": [
     {
       "id": "dg-weekly-penny",
@@ -13,11 +13,11 @@
       "store_name": "Dollar General",
       "event": "penny_day",
       "title": "Penny Day",
-      "detail": "Weekly Tuesday penny rotation. Discontinued SKUs tagged for 1¢ — arrive at opening for best pulls. · 93 community-confirmed UPCs.",
+      "detail": "Weekly Tuesday penny rotation. Discontinued SKUs tagged for 1¢ — arrive at opening for best pulls. · 84 community-confirmed UPCs.",
       "day": "tue",
       "time_hint": "6–7 AM opening",
       "heat": "peak",
-      "items_expected": 93,
+      "items_expected": 84,
       "categories": [
         "seasonal",
         "apparel",
@@ -42,7 +42,7 @@
       "store_id": "aldi",
       "store_name": "ALDI",
       "event": "markdown_cycle",
-      "title": "Flipp circular · 72 deals",
+      "title": "This week's deals · 72",
       "detail": "72 tracked deals from Flipp. Picks: $0.99 Pembrook Mother's Day Card; $1.79 Strawberries; $1.99 Clancy's Loaded Bacon or Spicy Dill Pota. Valid through 2026-04-29.",
       "day": "sun",
       "heat": "high",
@@ -54,7 +54,7 @@
       "store_id": "best-buy",
       "store_name": "Best Buy",
       "event": "markdown_cycle",
-      "title": "Flipp circular · 116 deals",
+      "title": "This week's deals · 116",
       "detail": "116 tracked deals from Flipp. Picks: $6.99 LEGO - Friends Unicorn Cake Delivery Car; $8.99 LEGO - Animal Crossing Stargazing with C; $9.99 Jurassic World - Strike Attack Dinosaur . Valid through 2026-04-28.",
       "day": "sun",
       "heat": "high",
@@ -66,7 +66,7 @@
       "store_id": "costco",
       "store_name": "Costco ",
       "event": "markdown_cycle",
-      "title": "Flipp circular · 138 deals",
+      "title": "This week's deals · 138",
       "detail": "138 tracked deals from Flipp. Picks: $7.97 Felina Women's Velour Track Suit; $9.97 Steve Madden Women's Bodysuit, 2-pack; $12.97 Character Kids' 4-piece PJ Set. Valid through 2026-04-27.",
       "day": "sun",
       "heat": "high",
@@ -78,7 +78,7 @@
       "store_id": "cvs",
       "store_name": "CVS",
       "event": "markdown_cycle",
-      "title": "Flipp circular · 150 deals",
+      "title": "This week's deals · 150",
       "detail": "150 tracked deals from Flipp. Picks: $2.49 Well Market popcorn; $2.99 Select Kellogg's cereal; $3.49 Post 11-12.5 oz or Grape-Nuts cereal 20.. Valid through 2026-04-26.",
       "day": "sun",
       "heat": "high",
@@ -90,7 +90,7 @@
       "store_id": "dollar-general",
       "store_name": "Dollar General",
       "event": "markdown_cycle",
-      "title": "Flipp circular · 150 deals",
+      "title": "This week's deals · 150",
       "detail": "150 tracked deals from Flipp. Picks: $1 Holly Williams Mini Frame or Word Block; $1 CRAFTED & COLLECTED COLLECTION; $1 CRAFTED & COLLECTED COLLECTION. Valid through 2026-04-26.",
       "day": "sun",
       "heat": "high",
@@ -102,7 +102,7 @@
       "store_id": "family-dollar",
       "store_name": "Family Dollar",
       "event": "markdown_cycle",
-      "title": "Flipp circular · 117 deals",
+      "title": "This week's deals · 117",
       "detail": "117 tracked deals from Flipp. Picks: $1.25 Family Pet Filled Bones; $1.5 French's Yellow Mustard; $1.75 Family Pet Wet Cat Food. Valid through 2026-04-26.",
       "day": "sun",
       "heat": "high",
@@ -114,7 +114,7 @@
       "store_id": "five-below",
       "store_name": "Five Below",
       "event": "markdown_cycle",
-      "title": "Flipp circular · 116 deals",
+      "title": "This week's deals · 116",
       "detail": "116 tracked deals from Flipp. Picks: $1 Scented Juicy Fruits Dot Markers 6-Pack; $1 Vitamin-C & Coconut Oil Cleansing Facial; $1 Jumbo Coloring & Activity Book. Valid through 2026-04-28.",
       "day": "sun",
       "heat": "high",
@@ -122,11 +122,23 @@
       "source_url": "https://flipp.com/flyer/7897288"
     },
     {
+      "id": "flipp-jcp",
+      "store_id": "jcp",
+      "store_name": "JCPenney",
+      "event": "markdown_cycle",
+      "title": "This week's deals · 150",
+      "detail": "150 tracked deals from Flipp. Picks: save 58% Liz Claiborne jewelry; save 51% Monet Jewelry; save 51% Fashion jewelry & hair accessories. Valid through 2026-05-14.",
+      "day": "sun",
+      "heat": "high",
+      "items_expected": 150,
+      "source_url": "https://flipp.com/flyer/7876241"
+    },
+    {
       "id": "flipp-kohls",
       "store_id": "kohls",
       "store_name": "Kohl's",
       "event": "markdown_cycle",
-      "title": "Flipp circular · 78 deals",
+      "title": "This week's deals · 78",
       "detail": "78 tracked deals from Flipp. Picks: $5.44 Emberly Crochet Daisy Hair Claw Clips 2-; $5.59 Coconut Grove 3-Pack Tropicool Playgroun; $5.95 LC Lauren Conrad Rose Gold Tone Crystal . Valid through 2026-04-29.",
       "day": "sun",
       "heat": "high",
@@ -138,8 +150,8 @@
       "store_id": "lowes",
       "store_name": "Lowe's",
       "event": "markdown_cycle",
-      "title": "Flipp circular · 65 deals",
-      "detail": "65 tracked deals from Flipp. Picks: $5 Ready-to-Use 1-Gallon Weed & Grass Kille; $5 Bug Stop® Home Barrier Ready-to-Use 1-Ga; $5 Oldcastle Concrete Edging Stone. Valid through 2026-05-07.",
+      "title": "This week's deals · 65",
+      "detail": "65 tracked deals from Flipp. Picks: $5 Ready-to-Use 1-Gallon Weed & Grass Kille; $5 1-Pint Annuals Marigold Shown; $5 11.7-in Square Patio Stone. Valid through 2026-05-07.",
       "day": "sun",
       "heat": "high",
       "items_expected": 65,
@@ -150,7 +162,7 @@
       "store_id": "meijer",
       "store_name": "Meijer",
       "event": "markdown_cycle",
-      "title": "Flipp circular · 150 deals",
+      "title": "This week's deals · 150",
       "detail": "150 tracked deals from Flipp. Picks: $0.89 Meijer Pasta Salad; $0.99 Fresh from Meijer Family Pack Chicken Dr; 7 for $7* pick any 7 or more $ Bucked Up Ready to Drink Energy Drink 16. Valid through 2026-04-29.",
       "day": "sun",
       "heat": "high",
@@ -162,7 +174,7 @@
       "store_id": "menards",
       "store_name": "Menards",
       "event": "markdown_cycle",
-      "title": "Flipp circular · 150 deals",
+      "title": "This week's deals · 150",
       "detail": "150 tracked deals from Flipp. Picks: $0.79 Chalet Laminate Flooring; $1.19 36\" Spindle; $1.19 Invitation Laminate Flooring. Valid through 2026-05-04.",
       "day": "sun",
       "heat": "high",
@@ -174,7 +186,7 @@
       "store_id": "ollies",
       "store_name": "Ollie's Bargain Outlet",
       "event": "markdown_cycle",
-      "title": "Flipp circular · 138 deals",
+      "title": "This week's deals · 138",
       "detail": "138 tracked deals from Flipp. Picks: THEIRS $1.09/SQ. FT. THAT'S ON LAMINATE FLOORING COASTAL OAK; THEIRS $8.99 8\" SUCCULENT PLANTER; THEIRS $6.99 COMBAT MAX 6 PK. ANT BAIT. Valid through 2026-04-30.",
       "day": "sun",
       "heat": "high",
@@ -186,7 +198,7 @@
       "store_id": "target",
       "store_name": "Target",
       "event": "markdown_cycle",
-      "title": "Flipp circular · 150 deals",
+      "title": "This week's deals · 150",
       "detail": "150 tracked deals from Flipp. Picks: $2.89 up & up 36-ct. 18-oz. red plastic cups; $3 Quality-crafted snacks; $4.49 Select Favorite Day™ madeleines, brownie. Valid through 2026-04-26.",
       "day": "sun",
       "heat": "high",
@@ -198,7 +210,7 @@
       "store_id": "tj-maxx",
       "store_name": "TJ Maxx ",
       "event": "markdown_cycle",
-      "title": "Flipp circular · 87 deals",
+      "title": "This week's deals · 87",
       "detail": "87 tracked deals from Flipp. Picks: $5.99 girls heart sunglasses; $7.99 Little Boys Tech Big Logo Short Sleeve T; $7.99 big boys camo short sleeve tee. Valid through 2026-04-30.",
       "day": "sun",
       "heat": "high",
@@ -210,7 +222,7 @@
       "store_id": "ulta",
       "store_name": "ULTA",
       "event": "markdown_cycle",
-      "title": "Flipp circular · 60 deals",
+      "title": "This week's deals · 60",
       "detail": "60 tracked deals from Flipp. Picks: $1.99 Essence Extreme Shine Volume Lipgloss; $1.99 Essence Glossy Glaze High Shine Lipstick; $4 NYX Professional Makeup Powder Louder Br. Valid through 2026-04-27.",
       "day": "sun",
       "heat": "high",
@@ -222,19 +234,19 @@
       "store_id": "walgreens",
       "store_name": "Walgreens",
       "event": "markdown_cycle",
-      "title": "Flipp circular · 150 deals",
-      "detail": "150 tracked deals from Flipp. Picks: $1.29 Wet N Wild Products; $2.99 Hippeas Snacks; Earn $1 In-store rewards when  Suave Hair Care. Valid through 2026-04-26.",
+      "title": "This week's deals · 150",
+      "detail": "150 tracked deals from Flipp. Picks: $1.29 Wet N Wild Products; $1.88 Walgreens Household Products; $2.99 Hippeas Snacks. Valid through 2026-05-03.",
       "day": "sun",
       "heat": "high",
       "items_expected": 150,
-      "source_url": "https://flipp.com/flyer/7878965"
+      "source_url": "https://flipp.com/flyer/7887701"
     },
     {
       "id": "flipp-wm-ct",
       "store_id": "wm-ct",
       "store_name": "Walmart",
       "event": "markdown_cycle",
-      "title": "Flipp circular · 144 deals",
+      "title": "This week's deals · 144",
       "detail": "144 tracked deals from Flipp. Picks: $1.98 Great Value Fresh Seal Zipper Square Sna; $2 Hyponex by Scotts Brown Mulch, for Lands; $2.22 Sprayway Lemon Scent Glass Cleaner, 19 O. Valid through 2026-04-29.",
       "day": "sun",
       "heat": "high",
@@ -247,7 +259,7 @@
       "store_name": "Walmart",
       "event": "markdown_cycle",
       "title": "Flash Deals · 97",
-      "detail": "97 flash deals saved from walmart.com. Top savings: Now $1,049.99 Mikolo M4 All-In-One Smith Machine Home Gym Packag (SAVE $1,250.00); Now $699.99 SERWALL Outdoor HDPE Dining Table Set, 7-Piece Out (SAVE $800.00); Now $846.99 Ovios 8 Pieces Patio Furniture Outdoor Conversatio (SAVE $743.01).",
+      "detail": "97 limited-time deals on Walmart.com right now. Top savings: Now $699.99 SERWALL Outdoor HDPE Dining Table Set, 7-Piece Out (SAVE $800.00); Now $846.99 Ovios 8 Pieces Patio Furniture Outdoor Conversatio (SAVE $743.01); Now $849.00 Beatbot AquaSense 2 Cordless Robotic Pool Vacuum C (SAVE $700.00).",
       "day": "mon",
       "heat": "med",
       "items_expected": 97,
@@ -269,7 +281,7 @@
       "store_id": "bath-body-works",
       "store_name": "Bath & Body Works ",
       "event": "markdown_cycle",
-      "title": "Flipp circular · 51 deals",
+      "title": "This week's deals · 51",
       "detail": "51 tracked deals from Flipp. Picks: $3.95 White Barn A Toast To Mom! Wallflowers F; $7.95 Japanese Cherry Blossom Gentle & Clean F; $7.95 White Barn Moonlit Goddess Dryer Sheets. Valid through 2026-04-27.",
       "day": "sun",
       "heat": "med",
@@ -281,7 +293,7 @@
       "store_id": "dicks",
       "store_name": "Dick's Sporting Goods",
       "event": "markdown_cycle",
-      "title": "Flipp circular · 56 deals",
+      "title": "This week's deals · 56",
       "detail": "56 tracked deals from Flipp. Picks: $4.47 Rapala Crush City Freeloader Soft Bait; $5.4 Nike Youth Indiana Hoosiers Locker Room ; $5.99 Adidas Adult Indiana Hoosiers 2025-26 CF. Valid through 2026-04-29.",
       "day": "sun",
       "heat": "med",
@@ -293,7 +305,7 @@
       "store_id": "harbor-freight",
       "store_name": "Harbor Freight Tools",
       "event": "markdown_cycle",
-      "title": "Flipp circular · 52 deals",
+      "title": "This week's deals · 52",
       "detail": "52 tracked deals from Flipp. Picks: $4.99 11 in. Twist-and-Cut Cable Ties, 50-Pack; $7.99 4-1/2 in. Crimped Carbon Steel Wire Whee; $7.99 5 x 5 Canvas Drop Cloth. Valid through 2026-04-28.",
       "day": "sun",
       "heat": "med",
@@ -305,7 +317,7 @@
       "store_id": "hl",
       "store_name": "Hobby Lobby",
       "event": "markdown_cycle",
-      "title": "Flipp circular · 28 deals",
+      "title": "This week's deals · 28",
       "detail": "28 tracked deals from Flipp. Picks: Always 99¢ YKK Zippers, Sew-Ology® Thread, Bias Tap; Always Gildan® Youth and Adult Short-Sleeve T-S; ALWAYS 20% OFF THE MARKED PRIC Gildan® Youth and Adult Short-Sleeve T-S. Valid through 2026-04-27.",
       "day": "sun",
       "heat": "med",
@@ -313,23 +325,23 @@
       "source_url": "https://flipp.com/flyer/7890619"
     },
     {
-      "id": "flipp-kroger",
-      "store_id": "kroger",
-      "store_name": "Kroger",
+      "id": "flipp-home-depot",
+      "store_id": "home-depot",
+      "store_name": "Home Depot",
       "event": "markdown_cycle",
-      "title": "Flipp circular · 27 deals",
-      "detail": "27 tracked deals from Flipp. Picks: $5.99 BIC Multipurpose Lighter; $7 Dip® Tee; SAVE $10 Everyday Living® Citronella Bucket Candl. Valid through 2026-05-06.",
+      "title": "This week's deals · 33",
+      "detail": "33 tracked deals from Flipp. Picks: $0.99 TrafficMaster Lakeshore Pecan Stone 7 mm; $0.99 TrafficMaster Grey Oak 7 mm T x 8 in. W ; $1.49 TrafficMaster Silverton Oak 8 mm T x 7.5. Valid through 2026-04-27.",
       "day": "sun",
       "heat": "med",
-      "items_expected": 27,
-      "source_url": "https://flipp.com/flyer/7885769"
+      "items_expected": 33,
+      "source_url": "https://flipp.com/flyer/7903898"
     },
     {
       "id": "flipp-marshalls",
       "store_id": "marshalls",
       "store_name": "Marshalls",
       "event": "markdown_cycle",
-      "title": "Flipp circular · 56 deals",
+      "title": "This week's deals · 56",
       "detail": "56 tracked deals from Flipp. Picks: $4 LAURA GELLER Dream Team Blush Hour Eyesh; $5 WANDER BEAUTY Dualist Matte And Illumina; $5 OPI Gel Color Nail Polish. Valid through 2026-04-28.",
       "day": "sun",
       "heat": "med",
@@ -341,7 +353,7 @@
       "store_id": "office-depot",
       "store_name": "Office Depot OfficeMax",
       "event": "markdown_cycle",
-      "title": "Flipp circular · 46 deals",
+      "title": "This week's deals · 46",
       "detail": "46 tracked deals from Flipp. Picks: $3.05 Corrugated Box, 12\" x 12\" x 12\", Kraft; $4.99 BIC Wite-Out EZ Correct Correction Tape,; $6.99 BIC Round Stic Ballpoint Pens, Medium Po. Valid through 2026-04-27.",
       "day": "sun",
       "heat": "med",
@@ -353,7 +365,7 @@
       "store_id": "petsmart",
       "store_name": "PetSmart",
       "event": "markdown_cycle",
-      "title": "Flipp circular · 36 deals",
+      "title": "This week's deals · 36",
       "detail": "36 tracked deals from Flipp. Picks: $9.29 Arcadia Reptile GoldenSun® Basking Halog; $9.45 Higgins Sunburst Gourmet Blend Parakeet ; $9.99 Zoo Med Eco Earth Loose Fiber Reptile Su. Valid through 2026-04-29.",
       "day": "sun",
       "heat": "med",
@@ -372,7 +384,7 @@
       "source_url": "https://www.kroger.com/coupons"
     },
     {
-      "id": "rss-thefreebieguy.com-021-107651",
+      "id": "rss-thefreebieguy.com-029-007191",
       "store_id": "target",
       "store_name": "Target",
       "event": "community_confirm",
@@ -434,16 +446,16 @@
       "source_url": "https://www.cvs.com/weeklyad"
     },
     {
-      "id": "flipp-jcp",
-      "store_id": "jcp",
-      "store_name": "JCPenney",
+      "id": "flipp-kroger",
+      "store_id": "kroger",
+      "store_name": "Kroger",
       "event": "markdown_cycle",
-      "title": "Flipp circular · 8 deals",
-      "detail": "8 tracked deals from Flipp. Valid through 2026-04-27.",
+      "title": "This week's deals · 19",
+      "detail": "19 tracked deals from Flipp. Picks: sale HGTV Foldable Metal Table; sale Ryker 3-Seat Swing; sale Raven 5-Piece Dining Set All Patio Furni. Valid through 2026-09-09.",
       "day": "sun",
       "heat": "low",
-      "items_expected": 8,
-      "source_url": "https://flipp.com/flyer/7888152"
+      "items_expected": 19,
+      "source_url": "https://flipp.com/flyer/7808133"
     },
     {
       "id": "meijer-weekly-ad",
@@ -545,7 +557,7 @@
     {
       "store_id": "kroger",
       "store_name": "Kroger",
-      "heat": "med",
+      "heat": "low",
       "days": {
         "mon": "off",
         "tue": "off",
@@ -553,13 +565,13 @@
         "thu": "off",
         "fri": "low",
         "sat": "off",
-        "sun": "med"
+        "sun": "low"
       }
     },
     {
       "store_id": "home-depot",
       "store_name": "Home Depot",
-      "heat": "low",
+      "heat": "med",
       "days": {
         "mon": "off",
         "tue": "off",
@@ -567,7 +579,7 @@
         "thu": "off",
         "fri": "off",
         "sat": "low",
-        "sun": "off"
+        "sun": "med"
       }
     },
     {
@@ -671,6 +683,20 @@
     {
       "store_id": "five-below",
       "store_name": "five-below",
+      "heat": "high",
+      "days": {
+        "mon": "off",
+        "tue": "off",
+        "wed": "off",
+        "thu": "off",
+        "fri": "off",
+        "sat": "off",
+        "sun": "high"
+      }
+    },
+    {
+      "store_id": "jcp",
+      "store_name": "jcp",
       "heat": "high",
       "days": {
         "mon": "off",
@@ -848,20 +874,6 @@
         "fri": "off",
         "sat": "off",
         "sun": "med"
-      }
-    },
-    {
-      "store_id": "jcp",
-      "store_name": "jcp",
-      "heat": "low",
-      "days": {
-        "mon": "off",
-        "tue": "off",
-        "wed": "off",
-        "thu": "off",
-        "fri": "off",
-        "sat": "off",
-        "sun": "low"
       }
     }
   ],
@@ -1537,199 +1549,128 @@
       "confirmed_on": "2026-04-24",
       "source": "community",
       "note": "krazycouponlady.com"
-    },
-    {
-      "store_id": "dollar-general",
-      "item": "Clover Valley D0012 Bf Jerky Original 2.75oz",
-      "upc": "47500016223",
-      "confirmed_on": "2026-04-24",
-      "source": "community",
-      "note": "thefreebieguy.com"
-    },
-    {
-      "store_id": "dollar-general",
-      "item": "Clover Valley D0011 Bf Jerky Teriyaki 2.75oz",
-      "upc": "47500016230",
-      "confirmed_on": "2026-04-24",
-      "source": "community",
-      "note": "thefreebieguy.com"
-    },
-    {
-      "store_id": "dollar-general",
-      "item": "Clover Valley D0010 Bf Jerky Peppered 2.75oz",
-      "upc": "47500016247",
-      "confirmed_on": "2026-04-24",
-      "source": "community",
-      "note": "thefreebieguy.com"
-    },
-    {
-      "store_id": "dollar-general",
-      "item": "Kars Sweet N Salty Mix 8oz",
-      "upc": "077034086287",
-      "confirmed_on": "2026-04-24",
-      "source": "community",
-      "note": "thefreebieguy.com"
-    },
-    {
-      "store_id": "dollar-general",
-      "item": "Planters Sweet N Crunchy Peanuts 10oz",
-      "upc": "029000072503",
-      "confirmed_on": "2026-04-24",
-      "source": "community",
-      "note": "thefreebieguy.com"
-    },
-    {
-      "store_id": "dollar-general",
-      "item": "Good & Smart Roasted & Salted Pumpkin Seeds 3oz",
-      "upc": "753519472539",
-      "confirmed_on": "2026-04-24",
-      "source": "community",
-      "note": "thefreebieguy.com"
-    },
-    {
-      "store_id": "dollar-general",
-      "item": "Gerber Banana Blueberry 3.5oz",
-      "upc": "015000044787",
-      "confirmed_on": "2026-04-24",
-      "source": "community",
-      "note": "thefreebieguy.com"
-    },
-    {
-      "store_id": "dollar-general",
-      "item": "Gerber Fruit & Yogurt Strawberry Banana 3.5oz",
-      "upc": "015000044992",
-      "confirmed_on": "2026-04-24",
-      "source": "community",
-      "note": "thefreebieguy.com"
-    },
-    {
-      "store_id": "dollar-general",
-      "item": "Gerber Arrowroot Biscuits 5.5oz",
-      "upc": "015000005962",
-      "confirmed_on": "2026-04-24",
-      "source": "community",
-      "note": "thefreebieguy.com"
     }
   ],
   "sources": [
     {
       "name": "dollargeneral.com/weekly-ad",
       "kind": "scraper",
-      "last_checked": "2026-04-24T13:58:14+00:00",
+      "last_checked": "2026-04-24T14:44:23+00:00",
       "ok": false,
       "note": "fetch failed; stable signal still emitted"
     },
     {
       "name": "target.com/weeklyad",
       "kind": "scraper",
-      "last_checked": "2026-04-24T13:58:14+00:00",
+      "last_checked": "2026-04-24T14:44:23+00:00",
       "ok": false,
       "note": "fetch failed"
     },
     {
       "name": "cvs.com/deals",
       "kind": "scraper",
-      "last_checked": "2026-04-24T13:58:15+00:00",
+      "last_checked": "2026-04-24T14:44:23+00:00",
       "ok": true
     },
     {
       "name": "walgreens.com/weeklyad",
       "kind": "scraper",
-      "last_checked": "2026-04-24T13:58:33+00:00",
+      "last_checked": "2026-04-24T14:44:42+00:00",
       "ok": false,
       "note": "fetch failed"
     },
     {
       "name": "meijer.com/weeklyad",
       "kind": "scraper",
-      "last_checked": "2026-04-24T13:58:13+00:00",
+      "last_checked": "2026-04-24T14:44:22+00:00",
       "ok": false,
       "note": "fetch failed; stable signal still emitted"
     },
     {
       "name": "kroger.com/coupons",
       "kind": "api",
-      "last_checked": "2026-04-24T13:58:33+00:00",
+      "last_checked": "2026-04-24T14:44:42+00:00",
       "ok": false,
       "note": "api unreachable"
     },
     {
       "name": "homedepot.com/clearance",
       "kind": "scraper",
-      "last_checked": "2026-04-24T13:58:13+00:00",
+      "last_checked": "2026-04-24T14:44:22+00:00",
       "ok": false,
       "note": "fetch failed"
     },
     {
       "name": "lowes.com/clearance",
       "kind": "scraper",
-      "last_checked": "2026-04-24T13:58:13+00:00",
+      "last_checked": "2026-04-24T14:44:22+00:00",
       "ok": false,
       "note": "fetch failed"
     },
     {
       "name": "menards.com/rebates",
       "kind": "scraper",
-      "last_checked": "2026-04-24T13:58:13+00:00",
+      "last_checked": "2026-04-24T14:44:22+00:00",
       "ok": true
     },
     {
       "name": "barnesandnoble.com/bargain",
       "kind": "scraper",
-      "last_checked": "2026-04-24T13:58:33+00:00",
+      "last_checked": "2026-04-24T14:44:42+00:00",
       "ok": false,
       "note": "fetch failed"
     },
     {
       "name": "flipp-api",
       "kind": "api",
-      "last_checked": "2026-04-24T13:58:17+00:00",
+      "last_checked": "2026-04-24T14:44:26+00:00",
       "ok": true,
-      "note": "zip=48045; 26 merchants with deals"
+      "note": "zip=48045; 27 merchants with deals"
     },
     {
       "name": "penny-list-pages",
       "kind": "scraper",
-      "last_checked": "2026-04-24T13:58:15+00:00",
+      "last_checked": "2026-04-24T14:44:24+00:00",
       "ok": true
     },
     {
       "name": "thefreebieguy.com (playwright)",
       "kind": "scraper",
-      "last_checked": "2026-04-24T13:58:34+00:00",
-      "ok": true
+      "last_checked": "2026-04-24T14:45:10+00:00",
+      "ok": false,
+      "note": "browser launch failed: TimeoutError"
     },
     {
       "name": "walmart-html",
       "kind": "scraper",
-      "last_checked": "2026-04-24T13:58:06+00:00",
+      "last_checked": "2026-04-24T14:44:16+00:00",
       "ok": true,
       "note": "parsed walmart.html (97 products)"
     },
     {
       "name": "weekly-ad-pdfs",
       "kind": "scraper",
-      "last_checked": "2026-04-24T13:58:13+00:00",
+      "last_checked": "2026-04-24T14:44:22+00:00",
       "ok": true,
       "note": "cvs:82"
     },
     {
       "name": "thefreebieguy.com",
       "kind": "rss",
-      "last_checked": "2026-04-24T13:58:13+00:00",
+      "last_checked": "2026-04-24T14:44:22+00:00",
       "ok": true
     },
     {
       "name": "krazycouponlady.com",
       "kind": "rss",
-      "last_checked": "2026-04-24T13:58:13+00:00",
+      "last_checked": "2026-04-24T14:44:22+00:00",
       "ok": false,
       "note": "RSS retired; HTML scrape pending"
     },
     {
       "name": "pennypinchinmom.com",
       "kind": "rss",
-      "last_checked": "2026-04-24T13:58:14+00:00",
+      "last_checked": "2026-04-24T14:44:23+00:00",
       "ok": true
     }
   ]

@@ -162,7 +162,7 @@ async def fetch(client: httpx.AsyncClient) -> ScrapeResult:  # noqa: ARG001
         store_name="Walmart",
         event="markdown_cycle",
         title=f"Flash Deals · {total}",
-        detail=(f"{total} flash deals saved from walmart.com. Top savings: {samples}.")[:400],
+        detail=(f"{total} limited-time deals on Walmart.com right now. Top savings: {samples}.")[:400],
         day="mon",  # Walmart markdowns commonly Mon/Wed
         heat=heat,
         items_expected=total,

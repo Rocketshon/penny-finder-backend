@@ -163,7 +163,7 @@ def _build_highlight(
         store_id=store_id,
         store_name=store_name,
         event="markdown_cycle",
-        title=f"Flipp circular · {total} deals",
+        title=f"This week's deals · {total}",
         detail=" ".join(detail_parts)[:400],
         day="sun",
         heat=heat,

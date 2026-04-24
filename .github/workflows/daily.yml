@@ -1,0 +1,28 @@
+name: Daily Briefing
+on:
+  schedule:
+    - cron: "0 10 * * *"    # 6:00 AM ET (10:00 UTC)
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install package
+        run: pip install -e .
+      - name: Run full pipeline
+        run: python -m main
+      - name: Publish out/ to pages branch
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git checkout --orphan pages-tmp
+          git --work-tree=out add --all
+          git --work-tree=out commit -m "briefing $(date -u +%Y-%m-%dT%H:%MZ)" || exit 0
+          git push --force origin pages-tmp:pages

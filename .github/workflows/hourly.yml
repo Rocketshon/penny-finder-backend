@@ -1,0 +1,28 @@
+name: Hourly Community Refresh
+on:
+  schedule:
+    - cron: "15 * * * *"    # every hour at :15
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install package
+        run: pip install -e .
+      - name: Run community scrapers only
+        run: python -m main --community
+      - name: Publish out/ to pages branch
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git checkout --orphan pages-tmp
+          git --work-tree=out add --all
+          git --work-tree=out commit -m "community refresh $(date -u +%Y-%m-%dT%H:%MZ)" || exit 0
+          git push --force origin pages-tmp:pages

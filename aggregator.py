@@ -21,7 +21,7 @@ from confidence import boost_highlights, fold_duplicate_notes
 from cross_verify import verify_penny_list
 from headline import compose_headline
 from heat import build_store_weeks, compute_hunt_index, compute_peak_day, max_heat
-from schema import BriefingV1, Highlight, PennyListEntry, ScrapeResult
+from schema import BriefingV1, DealItem, Highlight, PennyListEntry, ScrapeResult
 from scrapers import ALL as ALL_SCRAPERS
 from scrapers._base import run_scraper
 
@@ -87,11 +87,22 @@ def aggregate(results: list[ScrapeResult], penny_list: list[PennyListEntry] | No
 
     highlights_all: list[Highlight] = []
     penny_all: list[PennyListEntry] = []
+    items_all: list[DealItem] = []
     sources = []
     for r in results:
         highlights_all.extend(r.highlights)
         penny_all.extend(r.penny_items)
+        items_all.extend(getattr(r, "items", []) or [])
         sources.append(r.source)
+
+    # Dedupe all_items by id (multiple scrapers can emit same item; keep first)
+    seen_item_ids: set[str] = set()
+    all_items: list[DealItem] = []
+    for it in items_all:
+        if it.id in seen_item_ids:
+            continue
+        seen_item_ids.add(it.id)
+        all_items.append(it)
 
     highlights = _dedupe_highlights(highlights_all)
 
@@ -118,6 +129,7 @@ def aggregate(results: list[ScrapeResult], penny_list: list[PennyListEntry] | No
         stores=build_store_weeks(highlights),
         penny_list=penny,
         sources=sources,
+        all_items=all_items,
     )
 
 

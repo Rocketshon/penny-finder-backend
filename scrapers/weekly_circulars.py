@@ -24,7 +24,7 @@ from pathlib import Path
 import httpx
 
 from heat import STORE_NAMES
-from schema import ScrapeResult, Source
+from schema import DealItem, ScrapeResult, Source
 from scrapers._base import utc_now_iso
 from scrapers.pdf_weekly_ad import build_highlight, parse_pdf
 
@@ -48,6 +48,7 @@ async def fetch(client: httpx.AsyncClient) -> ScrapeResult:  # noqa: ARG001
         )
 
     highlights = []
+    all_items: list[DealItem] = []
     notes: list[str] = []
     any_ok = False
 
@@ -73,6 +74,20 @@ async def fetch(client: httpx.AsyncClient) -> ScrapeResult:  # noqa: ARG001
                 source_url=f"file://{pdf.name}",
             )
         )
+        # Promote each parsed Deal into a DealItem for cross-store search.
+        for i, d in enumerate(deals[:80]):
+            slug = d.item.lower().replace(" ", "-")[:40]
+            all_items.append(
+                DealItem(
+                    id=f"pdf-{store_id}-{i}-{slug}",
+                    name=d.item[:140],
+                    store_id=store_id,
+                    source="pdf",
+                    price=d.price,
+                    sale_story=("WITH CARD" if d.has_card else None),
+                    valid_to=(date_text[-10:] if date_text and len(date_text) >= 10 else None),
+                )
+            )
         notes.append(f"{store_id}:{len(deals)}")
         any_ok = True
 
@@ -82,6 +97,7 @@ async def fetch(client: httpx.AsyncClient) -> ScrapeResult:  # noqa: ARG001
     return ScrapeResult(
         highlights=highlights,
         penny_items=[],
+        items=all_items,
         source=Source(
             name=SOURCE_NAME,
             kind="scraper",

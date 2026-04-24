@@ -24,7 +24,7 @@ from datetime import datetime
 import httpx
 from selectolax.parser import HTMLParser
 
-from schema import Highlight, PennyListEntry, ScrapeResult, Source
+from schema import DealItem, Highlight, PennyListEntry, ScrapeResult, Source
 from scrapers._base import empty_result, safe_get, utc_now_iso
 
 SOURCE_NAME = "penny-list-pages"
@@ -160,9 +160,26 @@ async def fetch(client: httpx.AsyncClient) -> ScrapeResult:
     # Aggregate source health: module reports ok=True if at least one page yielded data.
     any_ok = any(per_source_ok.values())
 
+    # Promote penny entries to DealItem for cross-source search too.
+    deal_items: list[DealItem] = []
+    for p in all_entries:
+        deal_items.append(
+            DealItem(
+                id=f"penny-{p.store_id}-{p.upc}",
+                name=p.item,
+                store_id=p.store_id,
+                source="penny-list",
+                price="$0.01",
+                sale_story="PENNY LIST",
+                upc=p.upc,
+                valid_to=p.confirmed_on,
+            )
+        )
+
     return ScrapeResult(
         highlights=highlights,
         penny_items=all_entries,
+        items=deal_items,
         source=Source(
             name=SOURCE_NAME,
             kind="scraper",

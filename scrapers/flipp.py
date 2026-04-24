@@ -25,7 +25,7 @@ from typing import Any
 import httpx
 
 from heat import STORE_NAMES
-from schema import Highlight, ScrapeResult, Source
+from schema import DealItem, Highlight, ScrapeResult, Source
 from scrapers._base import USER_AGENT, utc_now_iso
 
 SOURCE_NAME = "flipp-api"
@@ -172,6 +172,30 @@ def _build_highlight(
     )
 
 
+_MAX_ITEMS_PER_STORE = 60
+
+
+def _to_deal_item(it: dict[str, Any], store_id: str) -> DealItem | None:
+    name = (it.get("name") or "").strip()
+    if not name:
+        return None
+    cp = it.get("current_price")
+    op = it.get("original_price")
+    raw_id = str(it.get("id") or it.get("flyer_item_id") or "")
+    slug = (raw_id or name.lower().replace(" ", "-"))[:60]
+    return DealItem(
+        id=f"flipp-{store_id}-{slug}",
+        name=name[:140],
+        store_id=store_id,
+        source="flipp",
+        price=(f"${cp}" if cp not in (None, "", 0) else None),
+        original_price=(f"${op}" if op not in (None, "", 0) else None),
+        sale_story=(it.get("sale_story") or "").strip() or None,
+        image_url=it.get("clean_image_url") or it.get("clipping_image_url"),
+        valid_to=(it.get("valid_to") or "")[:10] or None,
+    )
+
+
 async def fetch(client: httpx.AsyncClient) -> ScrapeResult:
     postal = DEFAULT_POSTAL
     flyers = await _flyers_for_zip(client, postal)
@@ -179,6 +203,7 @@ async def fetch(client: httpx.AsyncClient) -> ScrapeResult:
         return ScrapeResult(
             highlights=[],
             penny_items=[],
+            items=[],
             source=Source(
                 name=SOURCE_NAME,
                 kind="api",
@@ -188,8 +213,7 @@ async def fetch(client: httpx.AsyncClient) -> ScrapeResult:
             ),
         )
 
-    # Pick the primary flyer per store (first one encountered keeps priority).
-    chosen: dict[str, tuple[int, str]] = {}  # store_id → (flyer_id, merchant_name)
+    chosen: dict[str, tuple[int, str]] = {}
     for f in flyers:
         merchant = f.get("merchant") or ""
         store_id = _lookup_store(merchant)
@@ -197,28 +221,42 @@ async def fetch(client: httpx.AsyncClient) -> ScrapeResult:
             continue
         chosen[store_id] = (int(f.get("id")), merchant)
 
-    # Fetch items concurrently (bounded).
     sem = asyncio.Semaphore(5)
 
-    async def _one(store_id: str, flyer_id: int, merchant_name: str) -> Highlight | None:
+    async def _one(store_id: str, flyer_id: int, merchant_name: str):
         async with sem:
-            items = await _items_for_flyer(client, postal, flyer_id)
-        if not items:
-            return None
+            raw_items = await _items_for_flyer(client, postal, flyer_id)
+        if not raw_items:
+            return None, []
         store_name = STORE_NAMES.get(store_id, merchant_name)
-        return _build_highlight(store_id, store_name, items, flyer_id)
+        highlight = _build_highlight(store_id, store_name, raw_items, flyer_id)
+        deal_items: list[DealItem] = []
+        for it in raw_items[:_MAX_ITEMS_PER_STORE]:
+            di = _to_deal_item(it, store_id)
+            if di is not None:
+                deal_items.append(di)
+        return highlight, deal_items
 
     results = await asyncio.gather(
         *(_one(sid, fid, mn) for sid, (fid, mn) in chosen.items()),
         return_exceptions=True,
     )
 
-    highlights = [h for h in results if isinstance(h, Highlight)]
-    notes = f"zip={postal}; {len(highlights)} merchants with deals"
+    highlights: list[Highlight] = []
+    all_items: list[DealItem] = []
+    for r in results:
+        if isinstance(r, tuple):
+            hl, items = r
+            if hl is not None:
+                highlights.append(hl)
+            all_items.extend(items)
+
+    notes = f"zip={postal}; {len(highlights)} merchants; {len(all_items)} items"
 
     return ScrapeResult(
         highlights=highlights,
         penny_items=[],
+        items=all_items,
         source=Source(
             name=SOURCE_NAME,
             kind="api",

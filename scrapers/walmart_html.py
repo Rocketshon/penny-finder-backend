@@ -25,7 +25,7 @@ from typing import Any
 
 import httpx
 
-from schema import Highlight, ScrapeResult, Source
+from schema import DealItem, Highlight, ScrapeResult, Source
 from scrapers._base import utc_now_iso
 
 SOURCE_NAME = "walmart-html"
@@ -153,6 +153,31 @@ async def fetch(client: httpx.AsyncClient) -> ScrapeResult:  # noqa: ARG001
     samples = "; ".join(_format_pick(p) for p in picks)
     heat = "high" if total >= 100 else "med" if total >= 30 else "low"
 
+    deal_items: list[DealItem] = []
+    for p in products[:80]:  # cap to keep briefing payload reasonable
+        pi = p.get("priceInfo") or {}
+        name = (p.get("name") or "").strip()
+        if not name:
+            continue
+        now = pi.get("linePriceDisplay") or pi.get("linePrice")
+        was = pi.get("wasPrice")
+        usid = str(p.get("usItemId") or p.get("itemId") or "")
+        if usid:
+            slug = usid
+        else:
+            slug = name.lower().replace(" ", "-")[:40]
+        deal_items.append(
+            DealItem(
+                id=f"walmart-{slug}",
+                name=name[:140],
+                store_id="wm-ct",
+                source="walmart-html",
+                price=now or (f"${p.get('price','')}" if p.get("price") else None),
+                original_price=was or None,
+                sale_story=pi.get("savings") or None,
+            )
+        )
+
     highlight = Highlight(
         id="walmart-flash-deals",
         store_id="wm-ct",  # matches the Walmart branch row in data.ts
@@ -169,11 +194,12 @@ async def fetch(client: httpx.AsyncClient) -> ScrapeResult:  # noqa: ARG001
     return ScrapeResult(
         highlights=[highlight],
         penny_items=[],
+        items=deal_items,
         source=Source(
             name=SOURCE_NAME,
             kind="scraper",
             last_checked=utc_now_iso(),
             ok=True,
-            note=f"parsed {path.name} ({total} products)",
+            note=f"parsed {path.name} ({total} products, {len(deal_items)} indexed)",
         ),
     )

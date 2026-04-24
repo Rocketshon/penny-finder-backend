@@ -85,6 +85,21 @@ class Source(BaseModel):
     note: Optional[str] = None
 
 
+class DealItem(BaseModel):
+    """One item across any data source — used for cross-store search."""
+
+    id: str                    # globally unique; "{source}-{slug}"
+    name: str
+    store_id: str
+    source: str                # "flipp", "pdf", "walmart-html", "penny-list"
+    price: Optional[str] = None        # formatted: "$2.99" or "2/$5"
+    original_price: Optional[str] = None
+    sale_story: Optional[str] = None   # "Buy 2 get $5 off", etc.
+    image_url: Optional[str] = None
+    upc: Optional[str] = None
+    valid_to: Optional[str] = None
+
+
 class BriefingV1(BaseModel):
     schema: Literal[1] = 1
     week_id: str
@@ -97,6 +112,8 @@ class BriefingV1(BaseModel):
     stores: list[StoreWeek]
     penny_list: list[PennyListEntry]
     sources: list[Source]
+    all_items: list[DealItem] = []
+
 
 
 @dataclass
@@ -105,6 +122,7 @@ class ScrapeResult:
 
     highlights: list[Highlight] = field(default_factory=list)
     penny_items: list[PennyListEntry] = field(default_factory=list)
+    items: list[DealItem] = field(default_factory=list)
     source: Source = field(
         default_factory=lambda: Source(
             name="unknown",

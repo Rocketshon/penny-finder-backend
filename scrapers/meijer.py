@@ -18,11 +18,11 @@ SOURCE_NAME = "meijer.com/weeklyad"
 
 async def fetch(client: httpx.AsyncClient) -> ScrapeResult:
     html = await safe_get(client, URL)
-    if not html:
-        return empty_result(SOURCE_NAME, "scraper", note="fetch failed")
+    ok = html is not None
 
-    tree = HTMLParser(html)
-    text = tree.text(separator=" ")[:10000].lower()
+    text = ""
+    if html:
+        text = HTMLParser(html).text(separator=" ")[:10000].lower()
 
     highlights: list[Highlight] = []
 
@@ -64,6 +64,7 @@ async def fetch(client: httpx.AsyncClient) -> ScrapeResult:
             name=SOURCE_NAME,
             kind="scraper",
             last_checked=utc_now_iso(),
-            ok=True,
+            ok=ok,
+            note=None if ok else "fetch failed; stable signal still emitted",
         ),
     )

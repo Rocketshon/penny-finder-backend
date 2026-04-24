@@ -31,7 +31,18 @@ WEEKDAYS: tuple[Weekday, ...] = ("mon", "tue", "wed", "thu", "fri", "sat", "sun"
 HEAT_WEIGHTS: dict[Heat, int] = {"off": 0, "low": 3, "med": 8, "high": 15, "peak": 25}
 HEAT_ORDER: dict[Heat, int] = {"off": 0, "low": 1, "med": 2, "high": 3, "peak": 4}
 
-STORE_IDS = ("dollar-general", "target", "cvs", "walgreens", "meijer", "kroger")
+STORE_IDS = (
+    "dollar-general",
+    "target",
+    "cvs",
+    "walgreens",
+    "meijer",
+    "kroger",
+    "home-depot",
+    "lowes",
+    "menards",
+    "barnes-noble",
+)
 
 
 class Highlight(BaseModel):

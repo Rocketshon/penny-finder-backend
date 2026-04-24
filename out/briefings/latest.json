@@ -2,21 +2,44 @@
   "schema": 1,
   "week_id": "2026-W17",
   "week_of": "2026-04-20",
-  "generated_at": "2026-04-24T04:27:36+00:00",
-  "hunt_index": 21,
-  "peak_day": "tue",
-  "headline": "Dollar general dollar general scenarios |  $5 off $25 weekly deals for 4/25 tuesday. Kroger digital coupon refresh wednesday. Target free tiny trivia + baby box giveaways and more coming to target!...",
+  "generated_at": "2026-04-24T04:54:20+00:00",
+  "hunt_index": 42,
+  "peak_day": "sat",
+  "headline": "Dollar general dollar general penny list · 84 upcs tuesday. Menards 11% rebate active saturday. Lowe's thursday markdown report thursday.",
   "highlights": [
     {
-      "id": "rss-thefreebieguy.com-003-721208",
+      "id": "penny-page-dollar-general-krazycouponlady.com",
       "store_id": "dollar-general",
       "store_name": "Dollar General",
       "event": "community_confirm",
-      "title": "Dollar General Scenarios |  $5 Off $25 Weekly Deals for 4/25",
-      "detail": "Dollar General Scenarios |  $5 Off $25 Weekly Deals for 4/25 🛒 Save BIG at Dollar General This Week — Digital Coupons + Stacking Tips! Who’s ready for BIG savings at Dollar General this week?! 💰 Make sure to download the",
+      "title": "Dollar General penny list · 84 UPCs",
+      "detail": "Community penny list from krazycouponlady.com (84 confirmed items).",
       "day": "tue",
       "heat": "high",
-      "source_url": "https://thefreebieguy.com/dollar-general-saturday-scenarios-list/"
+      "items_expected": 84,
+      "source_url": "https://thekrazycouponlady.com/tips/store-hacks/dollar-general-penny-list"
+    },
+    {
+      "id": "menards-11-rebate",
+      "store_id": "menards",
+      "store_name": "Menards",
+      "event": "coupon_stack",
+      "title": "11% Rebate active",
+      "detail": "11% Rebate active this week — stacks on top of clearance. Mail in or submit online; comes back as Menards merchandise credit.",
+      "day": "sat",
+      "heat": "high",
+      "source_url": "https://www.menards.com/main/rebates.html"
+    },
+    {
+      "id": "lowes-weekly-markdown",
+      "store_id": "lowes",
+      "store_name": "Lowe's",
+      "event": "markdown_cycle",
+      "title": "Thursday markdown report",
+      "detail": "Lowe's runs its weekly markdown report Thursday. Price-ending .02 = deepest cut; ends-in-7 is the last markdown.",
+      "day": "thu",
+      "heat": "med",
+      "source_url": "https://www.lowes.com/c/clearance"
     },
     {
       "id": "kroger-digital-refresh",
@@ -30,7 +53,7 @@
       "source_url": "https://www.kroger.com/coupons"
     },
     {
-      "id": "rss-thefreebieguy.com-037-127291",
+      "id": "rss-thefreebieguy.com-037-047468",
       "store_id": "target",
       "store_name": "Target",
       "event": "community_confirm",
@@ -50,6 +73,31 @@
       "day": "fri",
       "heat": "low",
       "source_url": "https://www.kroger.com/coupons"
+    },
+    {
+      "id": "bn-bargain-ongoing",
+      "store_id": "barnes-noble",
+      "store_name": "Barnes & Noble",
+      "event": "weekly_ad_start",
+      "title": "Bargain books",
+      "detail": "Bargain section rotates continuously — publisher remainders at 50–70% off list. Member 10% off stacks on top.",
+      "day": "sat",
+      "heat": "low",
+      "categories": [
+        "books"
+      ],
+      "source_url": "https://www.barnesandnoble.com/b/bargain-books/_/N-1z13ubn"
+    },
+    {
+      "id": "hd-penny-awareness",
+      "store_id": "home-depot",
+      "store_name": "Home Depot",
+      "event": "clearance_purge",
+      "title": "Price-ending penny trick",
+      "detail": "Scan UPCs at self-checkout — prices ending .06/.04/.03/.02/.01 are the clearance ladder. .01 = final penny before pull.",
+      "day": "sat",
+      "heat": "low",
+      "source_url": "https://www.homedepot.com/c/all_clearance"
     },
     {
       "id": "cvs-weekly-ad",
@@ -165,67 +213,829 @@
         "sat": "off",
         "sun": "off"
       }
+    },
+    {
+      "store_id": "home-depot",
+      "store_name": "Home Depot",
+      "heat": "low",
+      "days": {
+        "mon": "off",
+        "tue": "off",
+        "wed": "off",
+        "thu": "off",
+        "fri": "off",
+        "sat": "low",
+        "sun": "off"
+      }
+    },
+    {
+      "store_id": "lowes",
+      "store_name": "Lowe's",
+      "heat": "med",
+      "days": {
+        "mon": "off",
+        "tue": "off",
+        "wed": "off",
+        "thu": "med",
+        "fri": "off",
+        "sat": "off",
+        "sun": "off"
+      }
+    },
+    {
+      "store_id": "menards",
+      "store_name": "Menards",
+      "heat": "high",
+      "days": {
+        "mon": "off",
+        "tue": "off",
+        "wed": "off",
+        "thu": "off",
+        "fri": "off",
+        "sat": "high",
+        "sun": "off"
+      }
+    },
+    {
+      "store_id": "barnes-noble",
+      "store_name": "Barnes & Noble",
+      "heat": "low",
+      "days": {
+        "mon": "off",
+        "tue": "off",
+        "wed": "off",
+        "thu": "off",
+        "fri": "off",
+        "sat": "low",
+        "sun": "off"
+      }
     }
   ],
-  "penny_list": [],
+  "penny_list": [
+    {
+      "store_id": "dollar-general",
+      "item": "Delectables Cat Treats Stew Chicken & Tuna, 5 ct",
+      "upc": "032700154660",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Good N Fun Dog Treats Triple Flavor, 5 ct",
+      "upc": "091093948430",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Rachael Ray Wet Dog Food Beef & Pumpkin, 13 oz",
+      "upc": "071190423719",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Rachael Ray Wet Dog Food Chicken & Vegetables 13 oz",
+      "upc": "07119087409",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Rachael Ray Wet Dog Food Gentle Digestion, 13 oz",
+      "upc": "071190271129",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Temptations Cat Treats Tenderfill Salmon, 2.1 oz",
+      "upc": "023100136325",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Purina Friskies Tender and Crunch’d Chicken, Beef, Carrots, and Green Beans, 16 lb",
+      "upc": "50000575787",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Purina Friskies Dry Cat Food Indoor Delights Chicken, Salmon, Peas and Carrots, 16 lb",
+      "upc": "50000575800",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "9Lives Protein Plus With Tuna and Chicken Wet Cat Food, 5.5 oz",
+      "upc": "79100217229",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "9Lives Protein Plus With Tuna and Liver Wet Cat Food, 5.5 oz",
+      "upc": "79100761067",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "9Lives Protein Plus With Turkey and Cheese Wet Cat Food, 13 oz",
+      "upc": "79100778676",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "9Lives Plus Care Dry Cat Food, 3.15 lb",
+      "upc": "79100514175",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Purina Cat Chow Complete With Real Salmon Dry Cat Food, 3.15 lb",
+      "upc": "17800194778",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Purina Cat Chow Gentle Sensitive Stomach and Skin Dry Cat Food, 3.15 lb",
+      "upc": "17800166294",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Purina Cat Chow Naturals Dry Cat Food, 3.15 lb",
+      "upc": "17800113229",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Purina Cat Chow Naturals Chicken Dry Cat Food, 3.15 lb",
+      "upc": "17800171564",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Heartland Farms Variety Pack Canned Cat Food, 5.5 oz 12 ct",
+      "upc": "15200500106",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Heartland Farms Dry Dog Food Grilled Favorites, 31 lb",
+      "upc": "70155143013",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Heartland Farms High Protein Dry Dog Food Beef and Chicken, 15 lb",
+      "upc": "70155144584",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Rachael Ray Nutrish Chicken Paw Pie Wet Dog Food, 8 oz",
+      "upc": "71190006745",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Rachael Ray Nutrish Natural Hearty Beef Stew Wet Dog Food, 8 oz",
+      "upc": "71190006721",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Banquet Backyard BBQ, Frozen Meal, 10.45 oz",
+      "upc": "031000007386",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Banquet Mac and Cheese, Frozen Meal, 8 oz",
+      "upc": "031000007324",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Clover Valley Cheese Ravioli",
+      "upc": "031332201032",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Clover Valley Frozen Lobster Bites, 1 ct",
+      "upc": "075730305978",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Clover Valley General Tso Chicken Bites With Rice, 1 ct",
+      "upc": "075730306012",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Clover Valley Homestyle Meatballs, 12 oz",
+      "upc": "031332201025",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Clover Valley Italian Style Meatballs, 12 oz",
+      "upc": "031332201018",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Clover Valley Mandarin Orange Chicken Bites With Rice, 1 ct",
+      "upc": "075730306029",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Clover Valley Mini Cheese Ravioli",
+      "upc": "031332201049",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Clover Valley Original French Toast Sticks, 10 oz",
+      "upc": "075730308603",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Clover Valley Original Hush Puppies, 16 oz",
+      "upc": "075128300080",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Eggo Minis Pancake Bites Buttermilk, Frozen Breakfast, 14.1 oz 40 ct",
+      "upc": "038000260667",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Eggo Minis Pancake Bites Chocolatey Chip, Frozen Breakfast, 8.4 oz 5 ct",
+      "upc": "038000111907",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Eggo Thick and Fluffy Waffles Original, Frozen Breakfast, 11.6 oz 6 ct",
+      "upc": "038000492761",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Eggo Waffles Buttermilk, 2.54 oz",
+      "upc": "038000307058",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "El Monterey Signature Frozen Chicken Fajitas Meal, 8 oz",
+      "upc": "071007001994",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Extra Value Meats Patties, Beef, 16 ct",
+      "upc": "079821000421",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Farm Rich BBQ Style Boneless Chicken Bites, 8 oz",
+      "upc": "041322235138",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Farm Rich Buffalo Style Boneless Chicken Bites, 8 oz",
+      "upc": "041322235084",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Fast Bites Breaded Chicken Sliders, 4 ct",
+      "upc": "071421001419",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Fast Fixin' Breaded Chicken Patties, 22.5 oz",
+      "upc": "075901382050",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Fast Fixin' Dino Bites, Breaded Dinosaur-Shaped Chicken Nuggets, 24 oz",
+      "upc": "075901382241",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Holten's Chop House Smashed Burgers, Beef Patties, 24 oz 6 ct",
+      "upc": "079821103146",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Hot Pockets Sausage, Egg & Cheese, 9 oz",
+      "upc": "043695568523",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Hot Pockets Sausage, Egg & Cheese Croissant Crust Frozen Breakfast Sandwiches, 2 ct",
+      "upc": "043695062021",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Jack's Pizza Sticks, Pull-Apart Cheese Pizza Sticks, 4 ct",
+      "upc": "074653853955",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Jack's Pepperoni Pizza Sticks, 8 oz",
+      "upc": "074653734124",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Jack's Pull-Apart Pepperoni Pizza Sticks, 10 ct",
+      "upc": "074653662717",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Jimmy Dean Biscuit Sandwiches, Sausage, Egg & Cheese, 18 oz 4 ct",
+      "upc": "077900002205",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Jimmy Dean Breakfast Burritos Meat Lovers, 4 ct",
+      "upc": "077900194887",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Jimmy Dean Maple Biscuit Roll-Ups, Sausage, Egg & Cheese, 8 ct",
+      "upc": "077900001116",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Lamb Weston Hash Browns, Thick Cut, 28 oz",
+      "upc": "043301611667",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Michael Angelo's Baked Ziti With Meatballs, 11 oz",
+      "upc": "037363982339",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Michelina's Cheeseburger Mac, 8 oz",
+      "upc": "717854105743",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Michelina's Grande Bacon Parmesan Linguine, 13 oz",
+      "upc": "717854154123",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Michelina's Grande Rigatoni Alfredo With Chicken & Broccoli, 13 oz",
+      "upc": "717854154178",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Ore-Ida Extra Crispy Crinkles Easy Fries, Microwavable Frozen Potatoes, 4.75 oz",
+      "upc": "013120012518",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Ore-Ida Extra Crispy Fries French Fried Potatoes, 4.25 oz",
+      "upc": "013120011504",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Perdue Chicken Breast Tenders, Gluten Free, 42 oz",
+      "upc": "072745856044",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Perdue Popcorn Chicken Bites, 22 oz",
+      "upc": "072745856051",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Raybern's Chicken Bacon Ranch",
+      "upc": "766626200148",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Raybern's Ham and Cheddar",
+      "upc": "766626200100",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Smithfield All Natural Fully Cooked Pork Sausage Links, Hometown Original, 12 oz",
+      "upc": "070800232604",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Smithfield Precooked Sausage Patties, 12 oz",
+      "upc": "070800232611",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "State Fair Classic Frozen Corn Dogs, 6 ct",
+      "upc": "071068161286",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Stouffer's Bowl-Fulls Chicken Bacon Ranch Frozen Meal",
+      "upc": "013800470089",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Stouffer's Bowl-Fulls Fried Chicken & Mashed Potatoes Frozen Meal, 14 oz",
+      "upc": "013800938947",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Stouffer's Bowl-Fulls Slow-Roasted Steak & Potatoes Frozen Meal, 14 oz",
+      "upc": "013800475626",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Stouffer's Classic Lasagna With Meat & Sauce, Large Family Size",
+      "upc": "013800232601",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Stouffer's French Bread Deluxe Pizzas, 12.75 oz 2 ct",
+      "upc": "013800178565",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Stouffer's French Bread Pepperoni Pizzas, 11.75 oz 2 ct",
+      "upc": "013800594341",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Tai Pei Potsticker, Chicken, 10.5 oz",
+      "upc": "070077811120",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Tapatío Chicken Enchiladas With Tapatio Hot Sauce, Frozen Mexican Food",
+      "upc": "013800177896",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Tapatío Salsa Roja Chicken Bowl With Tapatio Hot Sauce, Frozen Mexican Food, 10 oz",
+      "upc": "013800674531",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Totino's Party Pizza Supreme, 10.9 oz",
+      "upc": "042800107008",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Totino's Triple Cheese Party Pizza, 9.8 oz",
+      "upc": "042800115201",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Tyson Any'tizers Frozen Buffalo Style Boneless Chicken Bites, 11 oz",
+      "upc": "023700058225",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Tyson Any'tizers Frozen Crispy Boneless Chicken Bites, 11 oz",
+      "upc": "023700058218",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Tyson Boneless Skinless Chicken Breast Tenderloins, 2 lb",
+      "upc": "023700062338",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Tyson Original Chicken Breast Sandwich, 12 oz 2 ct",
+      "upc": "023700059413",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "SweeTarts Freeze Dried Candy, 4 oz",
+      "upc": "079200089092",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Lemonhead Freeze Dried Candy, 4 oz",
+      "upc": "0414200089121",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    },
+    {
+      "store_id": "dollar-general",
+      "item": "Spree Freeze Dried Candy, 4 oz",
+      "upc": "079200089504",
+      "confirmed_on": "2026-04-24",
+      "source": "community",
+      "note": "krazycouponlady.com"
+    }
+  ],
   "sources": [
     {
       "name": "dollargeneral.com/weekly-ad",
       "kind": "scraper",
-      "last_checked": "2026-04-24T04:27:17+00:00",
+      "last_checked": "2026-04-24T04:53:40+00:00",
       "ok": false,
       "note": "fetch failed"
     },
     {
       "name": "target.com/weeklyad",
       "kind": "scraper",
-      "last_checked": "2026-04-24T04:27:16+00:00",
+      "last_checked": "2026-04-24T04:53:39+00:00",
       "ok": false,
       "note": "fetch failed"
     },
     {
       "name": "cvs.com/deals",
       "kind": "scraper",
-      "last_checked": "2026-04-24T04:27:17+00:00",
+      "last_checked": "2026-04-24T04:53:40+00:00",
       "ok": true
     },
     {
       "name": "walgreens.com/weeklyad",
       "kind": "scraper",
-      "last_checked": "2026-04-24T04:27:20+00:00",
+      "last_checked": "2026-04-24T04:53:43+00:00",
       "ok": true
     },
     {
       "name": "meijer.com/weeklyad",
       "kind": "scraper",
-      "last_checked": "2026-04-24T04:27:16+00:00",
+      "last_checked": "2026-04-24T04:53:39+00:00",
       "ok": false,
       "note": "fetch failed"
     },
     {
       "name": "kroger.com/coupons",
       "kind": "api",
-      "last_checked": "2026-04-24T04:27:36+00:00",
+      "last_checked": "2026-04-24T04:53:59+00:00",
       "ok": false,
       "note": "api unreachable"
     },
     {
+      "name": "homedepot.com/clearance",
+      "kind": "scraper",
+      "last_checked": "2026-04-24T04:53:39+00:00",
+      "ok": false,
+      "note": "fetch failed"
+    },
+    {
+      "name": "lowes.com/clearance",
+      "kind": "scraper",
+      "last_checked": "2026-04-24T04:53:39+00:00",
+      "ok": false,
+      "note": "fetch failed"
+    },
+    {
+      "name": "menards.com/rebates",
+      "kind": "scraper",
+      "last_checked": "2026-04-24T04:53:39+00:00",
+      "ok": true
+    },
+    {
+      "name": "barnesandnoble.com/bargain",
+      "kind": "scraper",
+      "last_checked": "2026-04-24T04:53:59+00:00",
+      "ok": false,
+      "note": "fetch failed"
+    },
+    {
+      "name": "penny-list-pages",
+      "kind": "scraper",
+      "last_checked": "2026-04-24T04:53:41+00:00",
+      "ok": true
+    },
+    {
       "name": "thefreebieguy.com",
       "kind": "rss",
-      "last_checked": "2026-04-24T04:27:16+00:00",
+      "last_checked": "2026-04-24T04:53:39+00:00",
       "ok": true
     },
     {
       "name": "krazycouponlady.com",
       "kind": "rss",
-      "last_checked": "2026-04-24T04:27:16+00:00",
+      "last_checked": "2026-04-24T04:53:38+00:00",
       "ok": false,
       "note": "RSS retired; HTML scrape pending"
     },
     {
       "name": "pennypinchinmom.com",
       "kind": "rss",
-      "last_checked": "2026-04-24T04:27:17+00:00",
+      "last_checked": "2026-04-24T04:53:40+00:00",
       "ok": true
     }
   ]

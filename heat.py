@@ -17,6 +17,10 @@ STORE_NAMES: dict[str, str] = {
     "walgreens": "Walgreens",
     "meijer": "Meijer",
     "kroger": "Kroger",
+    "home-depot": "Home Depot",
+    "lowes": "Lowe's",
+    "menards": "Menards",
+    "barnes-noble": "Barnes & Noble",
 }
 
 

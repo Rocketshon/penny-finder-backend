@@ -45,6 +45,10 @@ SEARCH_URLS: dict[str, str] = {
     "walgreens": "https://www.walgreens.com/search/results.jsp?Ntt={upc}",
     "meijer": "https://www.meijer.com/shopping/search.html?text={upc}",
     "kroger": "https://www.kroger.com/search?query={upc}",
+    "home-depot": "https://www.homedepot.com/s/{upc}",
+    "lowes": "https://www.lowes.com/search?searchTerm={upc}",
+    "menards": "https://www.menards.com/main/search.html?search={upc}",
+    "barnes-noble": "https://www.barnesandnoble.com/s/{upc}",
 }
 
 CONCURRENCY = 6

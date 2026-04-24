@@ -18,7 +18,7 @@ import shutil
 import sys
 from pathlib import Path
 
-from aggregator import aggregate, run_all
+from aggregator import build_briefing
 from scrapers import ALL as ALL_SCRAPERS
 from scrapers import COMMUNITY
 
@@ -33,8 +33,8 @@ def _write_atomic(path: Path, data: str) -> None:
 
 async def _main(community_only: bool) -> int:
     scrapers = COMMUNITY if community_only else ALL_SCRAPERS
-    results = await run_all(scrapers)
-    briefing = aggregate(results)
+    # Hourly community refresh skips the slow cross-verify pass.
+    briefing = await build_briefing(scrapers, cross_verify=not community_only)
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     archive = OUT_DIR / f"{briefing.week_id}.json"

@@ -1,0 +1,232 @@
+{
+  "schema": 1,
+  "week_id": "2026-W17",
+  "week_of": "2026-04-20",
+  "generated_at": "2026-04-24T04:27:36+00:00",
+  "hunt_index": 21,
+  "peak_day": "tue",
+  "headline": "Dollar general dollar general scenarios |  $5 off $25 weekly deals for 4/25 tuesday. Kroger digital coupon refresh wednesday. Target free tiny trivia + baby box giveaways and more coming to target!...",
+  "highlights": [
+    {
+      "id": "rss-thefreebieguy.com-003-721208",
+      "store_id": "dollar-general",
+      "store_name": "Dollar General",
+      "event": "community_confirm",
+      "title": "Dollar General Scenarios |  $5 Off $25 Weekly Deals for 4/25",
+      "detail": "Dollar General Scenarios |  $5 Off $25 Weekly Deals for 4/25 🛒 Save BIG at Dollar General This Week — Digital Coupons + Stacking Tips! Who’s ready for BIG savings at Dollar General this week?! 💰 Make sure to download the",
+      "day": "tue",
+      "heat": "high",
+      "source_url": "https://thefreebieguy.com/dollar-general-saturday-scenarios-list/"
+    },
+    {
+      "id": "kroger-digital-refresh",
+      "store_id": "kroger",
+      "store_name": "Kroger",
+      "event": "coupon_stack",
+      "title": "Digital coupon refresh",
+      "detail": "Wednesday load-to-card refresh. Freebie Friday UPC drops at midnight Thursday.",
+      "day": "wed",
+      "heat": "low",
+      "source_url": "https://www.kroger.com/coupons"
+    },
+    {
+      "id": "rss-thefreebieguy.com-037-127291",
+      "store_id": "target",
+      "store_name": "Target",
+      "event": "community_confirm",
+      "title": "Free Tiny Trivia + Baby Box Giveaways and More Coming to Target!",
+      "detail": "Free Tiny Trivia + Baby Box Giveaways and More Coming to Target! Head to Target for freebies and giveaways this April! Select Target stores will be hosting in-store events where they will be offering free samples, giveaw",
+      "day": "wed",
+      "heat": "low",
+      "source_url": "https://thefreebieguy.com/free-target-event/"
+    },
+    {
+      "id": "kroger-freebie-friday",
+      "store_id": "kroger",
+      "store_name": "Kroger",
+      "event": "coupon_stack",
+      "title": "Freebie Friday",
+      "detail": "Free item of the week loads at midnight — clip via app before shopping.",
+      "day": "fri",
+      "heat": "low",
+      "source_url": "https://www.kroger.com/coupons"
+    },
+    {
+      "id": "cvs-weekly-ad",
+      "store_id": "cvs",
+      "store_name": "CVS",
+      "event": "weekly_ad_start",
+      "title": "New weekly ad",
+      "detail": "Register Rewards / ExtraBucks cycle refreshes. HBA + cosmetics focus.",
+      "day": "sun",
+      "heat": "low",
+      "categories": [
+        "HBA",
+        "cosmetics"
+      ],
+      "source_url": "https://www.cvs.com/weeklyad"
+    },
+    {
+      "id": "walgreens-weekly-ad",
+      "store_id": "walgreens",
+      "store_name": "Walgreens",
+      "event": "weekly_ad_start",
+      "title": "New ad · RR deals live",
+      "detail": "Register Rewards cycle starts. Check HBA + grocery for stack-worthy items.",
+      "day": "sun",
+      "heat": "low",
+      "categories": [
+        "HBA"
+      ],
+      "source_url": "https://www.walgreens.com/weeklyad"
+    }
+  ],
+  "stores": [
+    {
+      "store_id": "dollar-general",
+      "store_name": "Dollar General",
+      "heat": "high",
+      "days": {
+        "mon": "off",
+        "tue": "high",
+        "wed": "off",
+        "thu": "off",
+        "fri": "off",
+        "sat": "off",
+        "sun": "off"
+      }
+    },
+    {
+      "store_id": "target",
+      "store_name": "Target",
+      "heat": "low",
+      "days": {
+        "mon": "off",
+        "tue": "off",
+        "wed": "low",
+        "thu": "off",
+        "fri": "off",
+        "sat": "off",
+        "sun": "off"
+      }
+    },
+    {
+      "store_id": "cvs",
+      "store_name": "CVS",
+      "heat": "low",
+      "days": {
+        "mon": "off",
+        "tue": "off",
+        "wed": "off",
+        "thu": "off",
+        "fri": "off",
+        "sat": "off",
+        "sun": "low"
+      }
+    },
+    {
+      "store_id": "walgreens",
+      "store_name": "Walgreens",
+      "heat": "low",
+      "days": {
+        "mon": "off",
+        "tue": "off",
+        "wed": "off",
+        "thu": "off",
+        "fri": "off",
+        "sat": "off",
+        "sun": "low"
+      }
+    },
+    {
+      "store_id": "meijer",
+      "store_name": "Meijer",
+      "heat": "off",
+      "days": {
+        "mon": "off",
+        "tue": "off",
+        "wed": "off",
+        "thu": "off",
+        "fri": "off",
+        "sat": "off",
+        "sun": "off"
+      }
+    },
+    {
+      "store_id": "kroger",
+      "store_name": "Kroger",
+      "heat": "low",
+      "days": {
+        "mon": "off",
+        "tue": "off",
+        "wed": "low",
+        "thu": "off",
+        "fri": "low",
+        "sat": "off",
+        "sun": "off"
+      }
+    }
+  ],
+  "penny_list": [],
+  "sources": [
+    {
+      "name": "dollargeneral.com/weekly-ad",
+      "kind": "scraper",
+      "last_checked": "2026-04-24T04:27:17+00:00",
+      "ok": false,
+      "note": "fetch failed"
+    },
+    {
+      "name": "target.com/weeklyad",
+      "kind": "scraper",
+      "last_checked": "2026-04-24T04:27:16+00:00",
+      "ok": false,
+      "note": "fetch failed"
+    },
+    {
+      "name": "cvs.com/deals",
+      "kind": "scraper",
+      "last_checked": "2026-04-24T04:27:17+00:00",
+      "ok": true
+    },
+    {
+      "name": "walgreens.com/weeklyad",
+      "kind": "scraper",
+      "last_checked": "2026-04-24T04:27:20+00:00",
+      "ok": true
+    },
+    {
+      "name": "meijer.com/weeklyad",
+      "kind": "scraper",
+      "last_checked": "2026-04-24T04:27:16+00:00",
+      "ok": false,
+      "note": "fetch failed"
+    },
+    {
+      "name": "kroger.com/coupons",
+      "kind": "api",
+      "last_checked": "2026-04-24T04:27:36+00:00",
+      "ok": false,
+      "note": "api unreachable"
+    },
+    {
+      "name": "thefreebieguy.com",
+      "kind": "rss",
+      "last_checked": "2026-04-24T04:27:16+00:00",
+      "ok": true
+    },
+    {
+      "name": "krazycouponlady.com",
+      "kind": "rss",
+      "last_checked": "2026-04-24T04:27:16+00:00",
+      "ok": false,
+      "note": "RSS retired; HTML scrape pending"
+    },
+    {
+      "name": "pennypinchinmom.com",
+      "kind": "rss",
+      "last_checked": "2026-04-24T04:27:17+00:00",
+      "ok": true
+    }
+  ]
+}

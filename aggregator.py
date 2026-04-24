@@ -17,6 +17,8 @@ from datetime import datetime, timezone
 import httpx
 from dateutil.relativedelta import relativedelta
 
+from confidence import boost_highlights, fold_duplicate_notes
+from cross_verify import verify_penny_list
 from headline import compose_headline
 from heat import build_store_weeks, compute_hunt_index, compute_peak_day, max_heat
 from schema import BriefingV1, Highlight, PennyListEntry, ScrapeResult
@@ -47,12 +49,8 @@ def _dedupe_highlights(highlights: list[Highlight]) -> list[Highlight]:
 
 
 def _dedupe_penny(items: list[PennyListEntry]) -> list[PennyListEntry]:
-    seen: dict[tuple[str, str], PennyListEntry] = {}
-    for p in items:
-        key = (p.store_id, p.upc)
-        if key not in seen:
-            seen[key] = p
-    return list(seen.values())
+    # Fold duplicates so their notes combine (needed for confidence scoring).
+    return fold_duplicate_notes(items)
 
 
 async def run_all(scrapers=ALL_SCRAPERS) -> list[ScrapeResult]:
@@ -78,7 +76,12 @@ def _infer_kind(mod) -> str:
     return "scraper"
 
 
-def aggregate(results: list[ScrapeResult]) -> BriefingV1:
+def aggregate(results: list[ScrapeResult], penny_list: list[PennyListEntry] | None = None) -> BriefingV1:
+    """Build BriefingV1 from scraper results.
+
+    `penny_list` lets callers pass a post-verified list so confidence boosts
+    reflect catalog hits. When omitted, we use the raw dedup'd community list.
+    """
     now = datetime.now(timezone.utc)
     week_id, week_of = _iso_week_id(now)
 
@@ -91,13 +94,17 @@ def aggregate(results: list[ScrapeResult]) -> BriefingV1:
         sources.append(r.source)
 
     highlights = _dedupe_highlights(highlights_all)
+
+    penny = penny_list if penny_list is not None else _dedupe_penny(penny_all)
+
+    # Confidence boost: promote penny_day heat when community + catalog agree.
+    highlights = boost_highlights(highlights, penny)
+
     # Sort: heat desc, then day order, then store
     from schema import HEAT_ORDER, WEEKDAYS
 
     day_rank = {d: i for i, d in enumerate(WEEKDAYS)}
     highlights.sort(key=lambda h: (-HEAT_ORDER[h.heat], day_rank[h.day], h.store_id))
-
-    penny = _dedupe_penny(penny_all)
 
     return BriefingV1(
         schema=1,
@@ -112,3 +119,19 @@ def aggregate(results: list[ScrapeResult]) -> BriefingV1:
         penny_list=penny,
         sources=sources,
     )
+
+
+async def build_briefing(scrapers=ALL_SCRAPERS, *, cross_verify: bool = True) -> BriefingV1:
+    """Full pipeline: run scrapers → dedupe → cross-verify → confidence boost."""
+    results = await run_all(scrapers)
+
+    penny_all: list[PennyListEntry] = []
+    for r in results:
+        penny_all.extend(r.penny_items)
+    penny = _dedupe_penny(penny_all)
+    if cross_verify and penny:
+        penny = await verify_penny_list(penny)
+        # After verification, re-fold in case catalog note merges affected keys.
+        penny = fold_duplicate_notes(penny)
+
+    return aggregate(results, penny_list=penny)

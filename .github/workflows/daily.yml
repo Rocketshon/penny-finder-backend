@@ -16,6 +16,8 @@ jobs:
           python-version: "3.12"
       - name: Install package
         run: pip install -e .
+      - name: Install Playwright browser
+        run: python -m playwright install --with-deps chromium
       - name: Run full pipeline
         run: python -m main
       - name: Publish out/ to pages branch

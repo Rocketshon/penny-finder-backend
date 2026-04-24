@@ -9,6 +9,8 @@ dependencies = [
   "feedparser>=6.0",
   "pydantic>=2.5",
   "python-dateutil>=2.8",
+  "playwright>=1.47",
+  "playwright-stealth>=2.0",
 ]
 
 [project.optional-dependencies]

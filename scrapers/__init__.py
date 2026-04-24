@@ -18,6 +18,7 @@ from . import (
     menards,
     penny_pages,
     penny_pinchin,
+    playwright_tfg,
     target,
     walgreens,
 )
@@ -34,6 +35,7 @@ ALL = [
     menards,
     barnes_noble,
     penny_pages,
+    playwright_tfg,
     freebie_guy,
     kcl,
     penny_pinchin,

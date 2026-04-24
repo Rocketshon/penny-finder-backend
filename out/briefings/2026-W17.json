@@ -2,11 +2,29 @@
   "schema": 1,
   "week_id": "2026-W17",
   "week_of": "2026-04-20",
-  "generated_at": "2026-04-24T04:54:20+00:00",
-  "hunt_index": 42,
-  "peak_day": "sat",
-  "headline": "Dollar general dollar general penny list · 84 upcs tuesday. Menards 11% rebate active saturday. Lowe's thursday markdown report thursday.",
+  "generated_at": "2026-04-24T05:31:40+00:00",
+  "hunt_index": 62,
+  "peak_day": "tue",
+  "headline": "Dollar general penny day tuesday. Dollar general dollar general penny list · 84 upcs tuesday. Menards 11% rebate active saturday.",
   "highlights": [
+    {
+      "id": "dg-weekly-penny",
+      "store_id": "dollar-general",
+      "store_name": "Dollar General",
+      "event": "penny_day",
+      "title": "Penny Day",
+      "detail": "Weekly Tuesday penny rotation. Discontinued SKUs tagged for 1¢ — arrive at opening for best pulls. · 84 community-confirmed UPCs.",
+      "day": "tue",
+      "time_hint": "6–7 AM opening",
+      "heat": "peak",
+      "items_expected": 84,
+      "categories": [
+        "seasonal",
+        "apparel",
+        "HBA"
+      ],
+      "source_url": "https://www.dollargeneral.com/weekly-ad"
+    },
     {
       "id": "penny-page-dollar-general-krazycouponlady.com",
       "store_id": "dollar-general",
@@ -53,7 +71,7 @@
       "source_url": "https://www.kroger.com/coupons"
     },
     {
-      "id": "rss-thefreebieguy.com-037-047468",
+      "id": "rss-thefreebieguy.com-037-991222",
       "store_id": "target",
       "store_name": "Target",
       "event": "community_confirm",
@@ -115,6 +133,20 @@
       "source_url": "https://www.cvs.com/weeklyad"
     },
     {
+      "id": "meijer-weekly-ad",
+      "store_id": "meijer",
+      "store_name": "Meijer",
+      "event": "weekly_ad_start",
+      "title": "New weekly ad",
+      "detail": "mPerks refresh. Grocery-focused sale cycle.",
+      "day": "sun",
+      "heat": "low",
+      "categories": [
+        "grocery"
+      ],
+      "source_url": "https://www.meijer.com/weeklyad"
+    },
+    {
       "id": "walgreens-weekly-ad",
       "store_id": "walgreens",
       "store_name": "Walgreens",
@@ -133,10 +165,10 @@
     {
       "store_id": "dollar-general",
       "store_name": "Dollar General",
-      "heat": "high",
+      "heat": "peak",
       "days": {
         "mon": "off",
-        "tue": "high",
+        "tue": "peak",
         "wed": "off",
         "thu": "off",
         "fri": "off",
@@ -189,7 +221,7 @@
     {
       "store_id": "meijer",
       "store_name": "Meijer",
-      "heat": "off",
+      "heat": "low",
       "days": {
         "mon": "off",
         "tue": "off",
@@ -197,7 +229,7 @@
         "thu": "off",
         "fri": "off",
         "sat": "off",
-        "sun": "off"
+        "sun": "low"
       }
     },
     {
@@ -949,93 +981,100 @@
     {
       "name": "dollargeneral.com/weekly-ad",
       "kind": "scraper",
-      "last_checked": "2026-04-24T04:53:40+00:00",
+      "last_checked": "2026-04-24T05:30:44+00:00",
       "ok": false,
-      "note": "fetch failed"
+      "note": "fetch failed; stable signal still emitted"
     },
     {
       "name": "target.com/weeklyad",
       "kind": "scraper",
-      "last_checked": "2026-04-24T04:53:39+00:00",
+      "last_checked": "2026-04-24T05:30:44+00:00",
       "ok": false,
       "note": "fetch failed"
     },
     {
       "name": "cvs.com/deals",
       "kind": "scraper",
-      "last_checked": "2026-04-24T04:53:40+00:00",
+      "last_checked": "2026-04-24T05:30:45+00:00",
       "ok": true
     },
     {
       "name": "walgreens.com/weeklyad",
       "kind": "scraper",
-      "last_checked": "2026-04-24T04:53:43+00:00",
+      "last_checked": "2026-04-24T05:30:47+00:00",
       "ok": true
     },
     {
       "name": "meijer.com/weeklyad",
       "kind": "scraper",
-      "last_checked": "2026-04-24T04:53:39+00:00",
+      "last_checked": "2026-04-24T05:30:44+00:00",
       "ok": false,
-      "note": "fetch failed"
+      "note": "fetch failed; stable signal still emitted"
     },
     {
       "name": "kroger.com/coupons",
       "kind": "api",
-      "last_checked": "2026-04-24T04:53:59+00:00",
+      "last_checked": "2026-04-24T05:31:04+00:00",
       "ok": false,
       "note": "api unreachable"
     },
     {
       "name": "homedepot.com/clearance",
       "kind": "scraper",
-      "last_checked": "2026-04-24T04:53:39+00:00",
+      "last_checked": "2026-04-24T05:30:44+00:00",
       "ok": false,
       "note": "fetch failed"
     },
     {
       "name": "lowes.com/clearance",
       "kind": "scraper",
-      "last_checked": "2026-04-24T04:53:39+00:00",
+      "last_checked": "2026-04-24T05:30:44+00:00",
       "ok": false,
       "note": "fetch failed"
     },
     {
       "name": "menards.com/rebates",
       "kind": "scraper",
-      "last_checked": "2026-04-24T04:53:39+00:00",
+      "last_checked": "2026-04-24T05:30:44+00:00",
       "ok": true
     },
     {
       "name": "barnesandnoble.com/bargain",
       "kind": "scraper",
-      "last_checked": "2026-04-24T04:53:59+00:00",
+      "last_checked": "2026-04-24T05:31:04+00:00",
       "ok": false,
       "note": "fetch failed"
     },
     {
       "name": "penny-list-pages",
       "kind": "scraper",
-      "last_checked": "2026-04-24T04:53:41+00:00",
+      "last_checked": "2026-04-24T05:30:45+00:00",
       "ok": true
+    },
+    {
+      "name": "thefreebieguy.com (playwright)",
+      "kind": "scraper",
+      "last_checked": "2026-04-24T05:31:37+00:00",
+      "ok": false,
+      "note": "browser launch failed: TimeoutError"
     },
     {
       "name": "thefreebieguy.com",
       "kind": "rss",
-      "last_checked": "2026-04-24T04:53:39+00:00",
+      "last_checked": "2026-04-24T05:30:44+00:00",
       "ok": true
     },
     {
       "name": "krazycouponlady.com",
       "kind": "rss",
-      "last_checked": "2026-04-24T04:53:38+00:00",
+      "last_checked": "2026-04-24T05:30:43+00:00",
       "ok": false,
       "note": "RSS retired; HTML scrape pending"
     },
     {
       "name": "pennypinchinmom.com",
       "kind": "rss",
-      "last_checked": "2026-04-24T04:53:40+00:00",
+      "last_checked": "2026-04-24T05:30:46+00:00",
       "ok": true
     }
   ]

@@ -22,6 +22,7 @@ from . import (
     playwright_tfg,
     target,
     walgreens,
+    walmart_html,
     weekly_circulars,
 )
 
@@ -39,6 +40,7 @@ ALL = [
     flipp,
     penny_pages,
     playwright_tfg,
+    walmart_html,
     weekly_circulars,
     freebie_guy,
     kcl,

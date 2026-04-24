@@ -21,6 +21,7 @@ from . import (
     playwright_tfg,
     target,
     walgreens,
+    weekly_circulars,
 )
 
 ALL = [
@@ -36,6 +37,7 @@ ALL = [
     barnes_noble,
     penny_pages,
     playwright_tfg,
+    weekly_circulars,
     freebie_guy,
     kcl,
     penny_pinchin,

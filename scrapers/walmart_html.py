@@ -95,10 +95,11 @@ async def fetch(client: httpx.AsyncClient) -> ScrapeResult:  # noqa: ARG001
             ),
         )
 
-    candidates = [
-        p for p in CIRCULARS_DIR.glob("walmart*.html") if p.is_file()
-    ]
-    if not candidates:
+    # Explicit filename — we don't want to accidentally pick up the
+    # fetch-failure snapshot `walmart.last-attempt.html` (written by
+    # scripts/fetch_walmart.py on PerimeterX hits — tiny, no __NEXT_DATA__).
+    path = CIRCULARS_DIR / "walmart.html"
+    if not path.is_file():
         return ScrapeResult(
             highlights=[],
             penny_items=[],
@@ -107,13 +108,9 @@ async def fetch(client: httpx.AsyncClient) -> ScrapeResult:  # noqa: ARG001
                 kind="scraper",
                 last_checked=utc_now_iso(),
                 ok=False,
-                note="no circulars/walmart*.html file present",
+                note="no circulars/walmart.html file present",
             ),
         )
-
-    # Pick the most recently modified file.
-    candidates.sort(key=lambda p: p.stat().st_mtime, reverse=True)
-    path = candidates[0]
 
     try:
         products = _parse_walmart_html(path)

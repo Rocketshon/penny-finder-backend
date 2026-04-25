@@ -21,6 +21,10 @@ STORE_NAMES: dict[str, str] = {
     "lowes": "Lowe's",
     "menards": "Menards",
     "barnes-noble": "Barnes & Noble",
+    # Online-only synthetic stores for community/aggregator deals.
+    "online": "Online Deals",
+    "amazon": "Amazon",
+    "ebay": "eBay",
 }
 
 

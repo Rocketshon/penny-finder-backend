@@ -7,6 +7,7 @@ from __future__ import annotations
 
 from . import (
     barnes_noble,
+    camelcamel,
     cvs,
     dollar_general,
     flipp,
@@ -44,6 +45,7 @@ ALL = [
     walmart_html,
     weekly_circulars,
     slickdeals,
+    camelcamel,
     freebie_guy,
     kcl,
     penny_pinchin,

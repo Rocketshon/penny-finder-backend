@@ -100,17 +100,21 @@ def _retailer_for(title: str, summary: str) -> tuple[str, str]:
         candidate = m.group(1).strip().lower().rstrip(".,!?;:")
         if candidate in RETAILER_MAP:
             return RETAILER_MAP[candidate], candidate.title()
-    # Then head pattern ("Amazon has ...")
-    m = RETAILER_HEAD_RE.match(title.strip())
-    if m:
-        candidate = m.group(1).strip().lower().rstrip(".,!?;:")
-        if candidate in RETAILER_MAP:
-            return RETAILER_MAP[candidate], candidate.title()
-    # Fallback: scan known retailer names anywhere in title
-    low = title.lower()
-    for name, sid in RETAILER_MAP.items():
-        if f" {name} " in f" {low} " or low.startswith(f"{name} "):
-            return sid, name.title()
+    # Head patterns ("Amazon has ...") at start of title OR start of summary
+    for hay in (title.strip(), summary.strip()):
+        m = RETAILER_HEAD_RE.match(hay)
+        if m:
+            candidate = m.group(1).strip().lower().rstrip(".,!?;:")
+            if candidate in RETAILER_MAP:
+                return RETAILER_MAP[candidate], candidate.title()
+    # Fallback: scan known retailer names anywhere in haystack.
+    # Sort by length desc so multi-word matches win over substrings
+    # (e.g. "Best Buy" before "best", "Home Depot" before "home").
+    low = haystack.lower()
+    padded = f" {low} "
+    for name in sorted(RETAILER_MAP.keys(), key=len, reverse=True):
+        if f" {name} " in padded or padded.startswith(f" {name} "):
+            return RETAILER_MAP[name], name.title()
     return "online", "Online"
 
 

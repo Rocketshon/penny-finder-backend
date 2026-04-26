@@ -38,10 +38,25 @@ Deno.serve(async (req: Request) => {
 
   const cacheKey = `${chain.toLowerCase()}|${address.toLowerCase()}`.slice(0, 255);
 
-  // Cache lookup via PostgREST
+  // Cache lookup via PostgREST. Treat null/empty forecasts as misses so
+  // a transient upstream blip doesn't poison the cache for 7 days. We
+  // also cache permanent-failure sentinels separately (see below) with
+  // a shorter TTL so unhuntable chains don't burn quota every request.
   const cached = await getCached(cacheKey);
-  if (cached && Date.now() - new Date(cached.fetched_at).getTime() < CACHE_TTL_MS) {
-    return j({ ...cached.forecast, cache: 'hit' });
+  if (cached) {
+    const age = Date.now() - new Date(cached.fetched_at).getTime();
+    const f: any = cached.forecast;
+    const isFailureSentinel = f && f.error === 'no_forecast';
+    const isEmpty =
+      !f || (Array.isArray(f.hourlyBusyness) &&
+             f.hourlyBusyness.every((row: any) => !Array.isArray(row) || row.every((v: any) => v == null)));
+    const failTtl = 24 * 60 * 60 * 1000; // 24h for known-bad chains
+    if (isFailureSentinel && age < failTtl) {
+      return j({ error: 'no_forecast', cache: 'hit' }, 200);
+    }
+    if (!isEmpty && !isFailureSentinel && age < CACHE_TTL_MS) {
+      return j({ ...cached.forecast, cache: 'hit' });
+    }
   }
 
   // Fetch fresh
@@ -61,6 +76,9 @@ Deno.serve(async (req: Request) => {
   }
 
   if (btJson?.status !== 'OK') {
+    // Cache the failure sentinel so unhuntable chains don't burn
+    // BestTime quota on every request.
+    await putCached(cacheKey, { error: 'no_forecast' }).catch(() => {});
     return j(
       {
         error: 'BestTime non-OK',

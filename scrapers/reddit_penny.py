@@ -17,6 +17,7 @@ from __future__ import annotations
 import os
 import re
 import time
+from datetime import datetime, timezone
 from typing import Any
 
 import httpx
@@ -37,16 +38,39 @@ API_BASE = "https://oauth.reddit.com"
 USER_AGENT = "PennyHunter/0.1 (community-confirm; +https://pennyhunter.store)"
 
 # Subs to scan + which retailer they map to. Order matters — first match wins
-# when a UPC appears across subs.
+# when a UPC appears across subs. CRITICAL: store_id values must match the
+# rest of the backend's canonical IDs (`dollar-general`, NOT the app's
+# short `dg`). The aggregator's cross-verify + confidence-boost only joins
+# entries when store_ids match across sources.
 SUBREDDITS: list[tuple[str, str]] = [
-    ("dollargeneral", "dg"),
-    ("PennyShopper", "dg"),
-    ("Flipping", "dg"),  # general flipping; default to DG when in doubt
+    ("dollargeneral", "dollar-general"),
+    ("PennyShopper", "dollar-general"),
+    ("Flipping", "dollar-general"),  # general flipping; default to DG when in doubt
 ]
 
 # 12-13 digit UPC. Reject if surrounded by digits (likely phone/orderID),
-# allow word boundaries.
+# allow word boundaries. We additionally validate the UPC-12 mod-10 check
+# digit in _looks_like_upc() to filter out phone numbers and order IDs
+# that happen to be 12-13 digits long.
 UPC_RE = re.compile(r"(?<!\d)(\d{12,13})(?!\d)")
+
+
+def _looks_like_upc(digits: str) -> bool:
+    """Validate UPC-12 (or EAN-13) mod-10 check digit. ~90% of false
+    positives (phone numbers, order IDs) fail this check at zero cost."""
+    if len(digits) not in (12, 13):
+        return False
+    body, check = digits[:-1], int(digits[-1])
+    # UPC-12: odd-position digits ×3, even ×1, sum, mod 10
+    # EAN-13: odd ×1, even ×3 (positions counted from RIGHT excl. check)
+    # Both can be evaluated with: from RIGHT excl check, alternating ×3/×1
+    rev = body[::-1]
+    total = 0
+    for i, ch in enumerate(rev):
+        d = int(ch)
+        total += d * (3 if i % 2 == 0 else 1)
+    expected = (10 - (total % 10)) % 10
+    return expected == check
 
 # Cap how much we pull per sub per run — keeps the call cheap and avoids
 # rate-limit headaches.
@@ -113,7 +137,7 @@ async def _fetch_sub(
 def _extract_upcs(text: str) -> list[str]:
     if not text:
         return []
-    return UPC_RE.findall(text)
+    return [d for d in UPC_RE.findall(text) if _looks_like_upc(d)]
 
 
 def _short_item_name(title: str) -> str:
@@ -141,6 +165,12 @@ async def fetch(client: httpx.AsyncClient) -> ScrapeResult:
         )
 
     today = utc_now_iso()[:10]
+    # Use today's weekday for the synthetic confirm highlight (Reddit posts
+    # arrive any day; pinning to "tue" would mis-place the highlight in
+    # build_store_weeks calendar rollups).
+    today_weekday = ("mon", "tue", "wed", "thu", "fri", "sat", "sun")[
+        datetime.now(timezone.utc).weekday()
+    ]
     seen_upcs: set[str] = set()
     entries: list[PennyListEntry] = []
 
@@ -181,7 +211,7 @@ async def fetch(client: httpx.AsyncClient) -> ScrapeResult:
                     event="community_confirm",
                     title=f"Reddit confirms {count} UPC{'s' if count != 1 else ''}",
                     detail=f"{count} UPC{'s' if count != 1 else ''} mentioned in r/dollargeneral / r/PennyShopper / r/Flipping over the last batch of new posts.",
-                    day="tue",
+                    day=today_weekday,
                     heat="med",
                     items_expected=count,
                     source_url="https://www.reddit.com/r/PennyShopper/new/",

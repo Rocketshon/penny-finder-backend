@@ -21,10 +21,13 @@ Deno.serve(async (req: Request) => {
   // Service-role gate. Without it, anyone with the anon key could spam
   // arbitrary emails. The function is deployed with verify_jwt=true so
   // Supabase's gateway already requires a valid JWT, but we double-check
-  // it's the service role specifically.
+  // it's the service role specifically — exact match, not endsWith,
+  // since endsWith would accept any token that happens to share the
+  // suffix.
   const auth = req.headers.get('Authorization') ?? '';
   const serviceRole = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '';
-  if (!serviceRole || !auth.endsWith(serviceRole)) {
+  const expected = `Bearer ${serviceRole}`;
+  if (!serviceRole || auth !== expected) {
     return j({ error: 'service-role auth required' }, 403);
   }
 

@@ -1,0 +1,42 @@
+name: Penny Hunter Daily Digest
+
+# Posts a daily metrics summary to a sticky GitHub Issue, so the user
+# gets a phone notification (via GitHub mobile) every morning without
+# needing PostHog Cloud's paid email-subscription feature.
+#
+# The issue is reused across days — each run posts a new comment.
+# Open the issue once on your phone to start receiving notifications.
+
+on:
+  schedule:
+    # 13:00 UTC = 09:00 ET = 06:00 PT — early enough to be the morning brief
+    - cron: '0 13 * * *'
+  workflow_dispatch:
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install requests
+        run: pip install requests
+
+      - name: Build digest
+        env:
+          POSTHOG_PERSONAL_KEY: ${{ secrets.POSTHOG_PERSONAL_KEY }}
+          POSTHOG_PROJECT_ID: ${{ secrets.POSTHOG_PROJECT_ID }}
+          POSTHOG_DASHBOARD_ID: ${{ secrets.POSTHOG_DASHBOARD_ID }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DIGEST_REPO: ${{ github.repository }}
+          DIGEST_ISSUE_NUMBER: ${{ secrets.DIGEST_ISSUE_NUMBER }}
+        run: python scripts/post_digest.py

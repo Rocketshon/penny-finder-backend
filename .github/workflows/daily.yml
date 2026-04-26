@@ -19,6 +19,12 @@ jobs:
       - name: Install Playwright browser
         run: python -m playwright install --with-deps chromium
       - name: Run full pipeline
+        env:
+          # Reddit OAuth client-credentials for the reddit_penny scraper.
+          # Without these the scraper degrades gracefully — pipeline still
+          # runs, just no Reddit signal in that day's briefing.
+          REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+          REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
         run: python -m main
       - name: Publish out/ to pages branch
         run: |

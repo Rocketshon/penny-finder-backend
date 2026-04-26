@@ -98,6 +98,10 @@ class DealItem(BaseModel):
     image_url: Optional[str] = None
     upc: Optional[str] = None
     valid_to: Optional[str] = None
+    # Filled in post-aggregation by categorize_client (calls Claude Haiku
+    # via Supabase Edge Function). One of: tools, beauty, food, pet, home,
+    # tech, apparel, toys, seasonal, books, garden, health.
+    category: Optional[str] = None
 
 
 class BriefingV1(BaseModel):

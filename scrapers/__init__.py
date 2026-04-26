@@ -21,6 +21,7 @@ from . import (
     penny_pages,
     penny_pinchin,
     playwright_tfg,
+    reddit_penny,
     slickdeals,
     target,
     walgreens,
@@ -49,6 +50,7 @@ ALL = [
     freebie_guy,
     kcl,
     penny_pinchin,
+    reddit_penny,
 ]
 
-COMMUNITY = [freebie_guy, kcl, penny_pinchin]
+COMMUNITY = [freebie_guy, kcl, penny_pinchin, reddit_penny]

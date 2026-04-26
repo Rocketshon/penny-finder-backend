@@ -17,6 +17,7 @@ from datetime import datetime, timezone
 import httpx
 from dateutil.relativedelta import relativedelta
 
+from categorize_client import categorize_items
 from confidence import boost_highlights, fold_duplicate_notes
 from cross_verify import verify_penny_list
 from headline import compose_headline
@@ -103,6 +104,11 @@ def aggregate(results: list[ScrapeResult], penny_list: list[PennyListEntry] | No
             continue
         seen_item_ids.add(it.id)
         all_items.append(it)
+
+    # Tag each item with a Claude-classified category. Drives the in-app
+    # "Browse by Category" tab. Best-effort — on failure items keep
+    # `category=None` and the client falls back to its keyword heuristic.
+    all_items = categorize_items(all_items)
 
     highlights = _dedupe_highlights(highlights_all)
 

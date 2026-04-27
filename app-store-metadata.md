@@ -52,10 +52,10 @@ WHAT IT DOES
 • AI-categorizes every deal into 12 buckets — tools, beauty, food, pet, tech, apparel — so you can browse "what's on sale in beauty" across every store at once
 • Scan-to-check UPC — point your camera at a price tag, instant haptic feedback for a 1-cent match
 • Best time to visit each store — live foot-traffic forecasts tell you when to walk in for the freshest markdown shelves
-• Receipt scanner with Claude Vision OCR — snap a receipt, see what you could've saved by going elsewhere
+• Receipt scanner with vision AI OCR — snap a receipt, see what you could've saved by going elsewhere
 • Pair Sync — share watchlist + finds + live store status across two devices in real time, perfect for hunting partners
 • Penny-day calendar — Tuesday at Dollar General, Sunday at remodel stores, plus chains nobody else tracks
-• AI resale estimates (Pro Mode) — Claude-powered eBay sold-range estimate per UPC, answers "worth flipping?" before you reach the register
+• AI resale estimates (Hunter Mode) — eBay sold-range estimate per UPC, answers "worth flipping?" before you reach the register
 
 BUILT FOR TWO AUDIENCES
 
@@ -63,7 +63,7 @@ Hunters & resellers get penny-day timing, eBay comp lookups, profit ledger with 
 
 Casual shoppers get clean discovery — pick a store, pick a category, see what's on sale near you. Watchlist push when something you want hits a flyer.
 
-Toggle "Pro Mode" in Profile to switch between the two experiences.
+Toggle "Hunter Mode" in Profile to switch between the two experiences. It's free — no subscription, no paywall.
 
 HOW WE STAY FREE
 
@@ -101,7 +101,7 @@ Picked for App Store SEO + targeted at both audiences.
 • AI-powered category browser (12 buckets, every store)
 • UPC scanner with penny-list match + haptic feedback
 • Best time to visit each store (live foot-traffic data)
-• Receipt scanner with Claude Vision OCR + cross-store comparison
+• Receipt scanner with vision AI OCR + cross-store comparison
 • Pair Sync — share with one other device in real time
 • Pro Mode unlocks resale estimates + eBay comp lookups for flippers
 
@@ -149,7 +149,7 @@ Same content as Apple privacy nutrition. Google's form is more granular — matc
 - Financial info: **No**
 - Health & fitness: **No**
 - Messages: **No**
-- Photos & videos: **Yes** — receipt photos, processed on-device + sent to Anthropic for parsing only, not stored on our servers
+- Photos & videos: **Yes** — receipt photos, processed on-device + sent to a third-party AI service for parsing only, not stored on our servers
 - Audio files: **No**
 - Files & docs: **No**
 - Calendar: **No**

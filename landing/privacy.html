@@ -76,10 +76,11 @@
     <h3>5. Receipt photos (optional, on-demand)</h3>
     <p>
       If you scan a receipt, the photo is stored locally on your device only.
-      The image is sent to Anthropic (Claude) once for AI parsing into
-      structured items. Anthropic processes the image to return parsed data
-      and does not retain it for training under our API agreement
-      (see <a href="https://www.anthropic.com/legal/privacy">anthropic.com/legal/privacy</a>).
+      The image is sent to a third-party AI processing service once for
+      parsing into structured items, then discarded. The provider operates
+      under a no-training data agreement, meaning your receipt is not used
+      to train models
+      (<a href="https://www.anthropic.com/legal/privacy">provider privacy policy</a>).
       The receipt photo is never uploaded to our backend.
     </p>
 
@@ -97,7 +98,7 @@
       <li>Your contacts, calendar, photos library, or microphone</li>
       <li>Precise location coordinates (only zip-level)</li>
       <li>Item names from your finds (when sharing anonymously — only UPCs)</li>
-      <li>Receipt photos on our servers (only sent to Anthropic for parsing, then discarded)</li>
+      <li>Receipt photos on our servers (only sent to a third-party AI service for parsing, then discarded)</li>
     </ul>
 
     <h2>Third-party services we use</h2>
@@ -106,7 +107,7 @@
       <li><strong>Supabase</strong> (database, edge functions, realtime) — anonymous finds, pair sync data, briefing cache. <a href="https://supabase.com/privacy">supabase.com/privacy</a></li>
       <li><strong>PostHog</strong> (analytics) — anonymous usage events. <a href="https://posthog.com/privacy">posthog.com/privacy</a></li>
       <li><strong>Sentry</strong> (crash reporting) — JS error messages + stack traces. <a href="https://sentry.io/privacy/">sentry.io/privacy</a></li>
-      <li><strong>Anthropic</strong> (AI categorization, receipt OCR, resale estimates) — item names and receipt photos for the duration of the API call. <a href="https://www.anthropic.com/legal/privacy">anthropic.com/legal/privacy</a></li>
+      <li><strong>AI processing service</strong> (categorization, receipt OCR, resale estimates) — item names and receipt photos for the duration of the API call only. <a href="https://www.anthropic.com/legal/privacy">Provider privacy policy</a>.</li>
       <li><strong>Skimlinks</strong> (affiliate link tracking) — when you tap "Shop" on a deal, the outbound URL is wrapped through Skimlinks, which records the click for affiliate attribution. They may set cookies on the retailer site. <a href="https://skimlinks.com/privacy/">skimlinks.com/privacy</a></li>
       <li><strong>BestTime</strong> (busyness forecasts) — chain name + your city/state/zip are sent to BestTime so we can show "best time to visit" data. They do not receive your identity. <a href="https://besttime.app/privacy.html">besttime.app/privacy</a></li>
       <li><strong>Flipp</strong> (weekly ad data) — your zip code is sent to Flipp's public API to fetch weekly ads for retailers in your area. <a href="https://corp.flipp.com/privacy">corp.flipp.com/privacy</a></li>

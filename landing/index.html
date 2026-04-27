@@ -3,271 +3,240 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Penny Hunter — Find every store's best deals</title>
-  <meta name="description" content="Penny Hunter is a free deal-aggregator app for hunters and shoppers. Track 25+ retailers, find what's on sale near you, and never miss the Dollar General penny day." />
+  <title>Penny Hunter — Clearance intel for hunters & flippers</title>
+  <meta name="description" content="Penny Hunter is the deal-aggregator app built for clearance hunters, resellers, and shoppers. Track 43+ retailers, scan UPCs against penny lists, AI-categorize the best deals across every store." />
+  <meta property="og:title" content="Penny Hunter" />
+  <meta property="og:description" content="Find. Hunt. Flip. The clearance app built for hunters and shoppers." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://pennyhunter.store" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.85em' font-size='80'>1¢</text></svg>" />
-  <style>
-    :root {
-      --paper: #f6efe2;
-      --paper-deep: #ede5d3;
-      --paper-edge: #d8cdb1;
-      --ink: #1a1a1a;
-      --ink-mid: #555;
-      --ink-faint: #999;
-      --hot: #d64069;
-      --stamp: #4a8b3a;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { -webkit-font-smoothing: antialiased; }
-    body {
-      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto;
-      background: var(--paper);
-      color: var(--ink);
-      line-height: 1.5;
-    }
-    .mono { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
-    .container {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 48px 24px 80px;
-    }
-
-    .receipt {
-      background: var(--paper);
-      border: 1.5px solid var(--ink);
-      padding: 36px 28px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-    }
-    .brand {
-      font-size: 38px;
-      font-weight: 900;
-      letter-spacing: 6px;
-      text-align: center;
-      margin-bottom: 4px;
-    }
-    .meta {
-      font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-      font-size: 11px;
-      color: var(--ink-faint);
-      text-align: center;
-      letter-spacing: 2px;
-    }
-    .rule {
-      border: 0;
-      border-top: 1px dashed var(--ink);
-      margin: 24px 0;
-    }
-    .stamp {
-      display: inline-block;
-      border: 2px solid var(--hot);
-      color: var(--hot);
-      padding: 4px 10px;
-      font-size: 11px;
-      font-weight: 900;
-      letter-spacing: 2.5px;
-      transform: rotate(-3deg);
-      margin-bottom: 12px;
-    }
-    h1 {
-      font-size: 28px;
-      line-height: 1.25;
-      letter-spacing: -0.5px;
-      font-weight: 800;
-      margin-bottom: 14px;
-    }
-    h2 {
-      font-size: 16px;
-      letter-spacing: 1.6px;
-      text-transform: uppercase;
-      font-weight: 800;
-      margin: 32px 0 10px;
-    }
-    p { font-size: 15px; color: var(--ink-mid); margin-bottom: 12px; }
-    .lead { font-size: 17px; color: var(--ink); }
-
-    ul {
-      list-style: none;
-      padding-left: 0;
-      margin: 8px 0 16px;
-    }
-    li {
-      padding: 6px 0 6px 22px;
-      position: relative;
-      font-size: 14px;
-      color: var(--ink-mid);
-    }
-    li::before {
-      content: "·";
-      position: absolute;
-      left: 6px;
-      color: var(--hot);
-      font-weight: 900;
-      font-size: 18px;
-      line-height: 1;
-    }
-
-    .cta {
-      display: inline-block;
-      background: var(--ink);
-      color: var(--paper);
-      padding: 14px 22px;
-      letter-spacing: 2.5px;
-      font-weight: 900;
-      font-size: 12px;
-      text-decoration: none;
-      border-radius: 2px;
-      margin: 4px 4px 4px 0;
-    }
-    .cta--hot { background: var(--hot); }
-    .cta--ghost {
-      background: transparent;
-      color: var(--ink);
-      border: 1.5px solid var(--ink);
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px 24px;
-      margin: 14px 0;
-    }
-    .grid p { font-size: 13px; }
-
-    .footer {
-      font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-      font-size: 10px;
-      color: var(--ink-faint);
-      text-align: center;
-      letter-spacing: 2px;
-      margin-top: 28px;
-    }
-
-    .stores {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin: 8px 0 8px;
-    }
-    .store-pill {
-      font-family: ui-monospace, monospace;
-      font-size: 10px;
-      letter-spacing: 1px;
-      padding: 4px 8px;
-      border: 1px solid var(--paper-edge);
-      background: var(--paper-deep);
-      border-radius: 2px;
-      color: var(--ink-mid);
-    }
-
-    @media (max-width: 480px) {
-      .container { padding: 24px 16px 60px; }
-      .receipt { padding: 24px 18px; }
-      .brand { font-size: 30px; letter-spacing: 4px; }
-      h1 { font-size: 22px; }
-      .grid { grid-template-columns: 1fr; }
-    }
-  </style>
+  <link rel="stylesheet" href="/site.css" />
 </head>
 <body>
-  <main class="container">
-    <article class="receipt">
-      <div class="brand">PENNY · HUNTER</div>
-      <div class="meta">VOL.1  ·  ITEM HUNTER  ·  EST. 2026</div>
-      <hr class="rule" />
+<main class="container">
+  <article class="receipt">
+    <div class="brand">PENNY · HUNTER</div>
+    <div class="meta">VOL.1  ·  CLEARANCE INTEL  ·  EST. 2026</div>
+    <hr class="rule" />
 
-      <span class="stamp">FREE FOREVER</span>
-      <h1>Every store's best deals,<br />in one app.</h1>
-      <p class="lead">
-        Penny Hunter aggregates weekly ads, clearance lists, and online deals
-        from 25+ major retailers — Dollar General, Walmart, CVS, Walgreens,
-        Kroger, Target, Home Depot, and more — into a searchable index for
-        your zip code.
-      </p>
+    <span class="stamp">FREE FOREVER</span>
+    <h1>Find. Hunt. Flip.<br />The clearance app for serious shoppers.</h1>
+    <p class="lead">
+      Penny Hunter pulls weekly ads, penny-day lists, and clearance signals
+      from 43+ major retailers into one searchable app. AI tags every item
+      by category, scans receipts to flag deals you missed, and tells you
+      exactly when to walk into your local store for the freshest markdowns.
+    </p>
 
-      <hr class="rule" />
-
-      <h2>Built for two kinds of shopper</h2>
-      <div class="grid">
-        <div>
-          <p style="color: var(--ink); font-weight: 700;">Hunters · Resellers</p>
-          <p>
-            Penny day timing, peak-day pushes, hunt-route optimizer,
-            clearance heat grid, scan-to-check UPC, profit ledger.
-          </p>
-        </div>
-        <div>
-          <p style="color: var(--ink); font-weight: 700;">Everyday shoppers</p>
-          <p>
-            Type any item, find the cheapest local store with it on sale.
-            Watchlist + push when something you want hits a flyer.
-          </p>
-        </div>
-      </div>
-
-      <h2>What's tracked</h2>
-      <div class="stores">
-        <span class="store-pill">DOLLAR GENERAL</span>
-        <span class="store-pill">WALMART</span>
-        <span class="store-pill">TARGET</span>
-        <span class="store-pill">CVS</span>
-        <span class="store-pill">WALGREENS</span>
-        <span class="store-pill">KROGER</span>
-        <span class="store-pill">MEIJER</span>
-        <span class="store-pill">HOME DEPOT</span>
-        <span class="store-pill">LOWE'S</span>
-        <span class="store-pill">MENARDS</span>
-        <span class="store-pill">COSTCO</span>
-        <span class="store-pill">KOHL'S</span>
-        <span class="store-pill">TJ MAXX</span>
-        <span class="store-pill">MARSHALLS</span>
-        <span class="store-pill">ALDI</span>
-        <span class="store-pill">FIVE BELOW</span>
-        <span class="store-pill">FAMILY DOLLAR</span>
-        <span class="store-pill">DOLLAR TREE</span>
-        <span class="store-pill">BEST BUY</span>
-        <span class="store-pill">B&amp;N</span>
-        <span class="store-pill">+ MORE</span>
-      </div>
-
-      <h2>How it works</h2>
-      <ul>
-        <li>Set your zip — we pull current weekly ads for your local stores.</li>
-        <li>Search by item name across every retailer at once.</li>
-        <li>Star your favorites; we push when peak markdown days approach.</li>
-        <li>Tap "Shop" on any deal to open it at the retailer's site.</li>
-      </ul>
-
-      <hr class="rule" />
-
-      <h2>How we stay free</h2>
-      <p>
-        When you tap "Shop" on a deal and buy from the retailer, we may earn a
-        small commission at no cost to you. It never changes which deals we
-        show or how they're ranked. That's it — no subscriptions, no ads in
-        your face, no data resold to advertisers.
-      </p>
-
-      <h2>Get the app</h2>
-      <p style="margin-bottom: 18px;">
-        Currently in private beta on iOS via Expo Go. Public TestFlight + App
-        Store rollout coming soon.
-      </p>
-      <a class="cta" href="mailto:hello@pennyhunter.store?subject=Penny%20Hunter%20beta">REQUEST BETA</a>
-      <a class="cta cta--ghost" href="https://github.com/Rocketshon/penny-finder-backend">SCRAPER SOURCE</a>
-
-      <hr class="rule" />
-      <div class="footer">
-        — — — THANK YOU FOR HUNTING — — —<br />
-        © 2026 PENNY HUNTER  ·  pennyhunter.store<br />
-        <span style="font-size:9px;line-height:1.4;display:inline-block;max-width:480px;margin-top:8px;letter-spacing:1px;">
-          Penny Hunter participates in affiliate programs. When you click through
-          to a retailer and buy, we may earn a small commission at no cost to you.
+    <h2>Get the app</h2>
+    <div class="badges">
+      <a class="badge badge--soon" aria-disabled="true">
+        <span class="badge-icon"></span>
+        <span class="badge-text">
+          <span class="badge-small">COMING SOON</span>
+          <span class="badge-big">App Store</span>
         </span>
-      </div>
-    </article>
-  </main>
+      </a>
+      <a class="badge badge--soon" aria-disabled="true">
+        <span class="badge-icon">▶</span>
+        <span class="badge-text">
+          <span class="badge-small">COMING SOON</span>
+          <span class="badge-big">Google Play</span>
+        </span>
+      </a>
+    </div>
+    <form class="signup-row" action="https://formspree.io/f/xpennyhunterREPLACE" method="POST">
+      <input type="email" name="email" placeholder="your@email.com" required />
+      <button type="submit">NOTIFY ME</button>
+    </form>
+    <p class="signup-note">
+      We'll email you once when the app goes live. No newsletter, no spam.
+    </p>
 
-  <!-- Skimlinks affiliate auto-link script -->
-  <script type="text/javascript" src="https://s.skimresources.com/js/302076X1790065.skimlinks.js"></script>
+    <hr class="rule" />
+
+    <h2>Built for two kinds of shopper</h2>
+    <div class="grid">
+      <div>
+        <p style="color: var(--ink); font-weight: 700;">Hunters · Resellers</p>
+        <p>
+          Penny-day calendar, scan-to-check UPC, eBay sold-listing comps,
+          AI resale-price estimates, hunt-route optimizer, profit ledger,
+          remodel-pipeline tracker.
+        </p>
+      </div>
+      <div>
+        <p style="color: var(--ink); font-weight: 700;">Everyday shoppers</p>
+        <p>
+          Browse by store, browse by category, search any item across every
+          retailer at once. Watchlist + push when a target item hits a flyer.
+          Receipt scanner shows what you could've saved by going elsewhere.
+        </p>
+      </div>
+    </div>
+
+    <h2>What you'll see</h2>
+    <p style="font-size:13px;">A small slice of what gets surfaced in the app, every day:</p>
+    <div class="deal-grid">
+      <div class="deal-card">
+        <div class="deal-store">DOLLAR GENERAL · TUE</div>
+        <div class="deal-name">Pioneer Woman 16oz Mug</div>
+        <div><span class="deal-penny">1¢</span></div>
+      </div>
+      <div class="deal-card">
+        <div class="deal-store">CVS · WEEKLY AD</div>
+        <div class="deal-name">L'Oréal Paris Mascara</div>
+        <div><span class="deal-price">$3.99</span> <span class="deal-was">$10.99</span></div>
+      </div>
+      <div class="deal-card">
+        <div class="deal-store">HOME DEPOT · CLEARANCE</div>
+        <div class="deal-name">DeWalt 20V Drill Combo Kit</div>
+        <div><span class="deal-price">$79</span> <span class="deal-was">$179</span></div>
+      </div>
+      <div class="deal-card">
+        <div class="deal-store">FIVE BELOW · CLEARANCE</div>
+        <div class="deal-name">Bluetooth Wireless Earbuds</div>
+        <div><span class="deal-price">$3</span> <span class="deal-was">$15</span></div>
+      </div>
+      <div class="deal-card">
+        <div class="deal-store">TARGET · 70% OFF</div>
+        <div class="deal-name">Easter Plush — End of Season</div>
+        <div><span class="deal-price">$4.49</span> <span class="deal-was">$14.99</span></div>
+      </div>
+      <div class="deal-card">
+        <div class="deal-store">WALGREENS · BOGO</div>
+        <div class="deal-name">Sun Bum SPF 30 Spray</div>
+        <div><span class="deal-price">2 / $14</span> <span class="deal-was">$13.99 ea</span></div>
+      </div>
+    </div>
+
+    <h2>The features that matter</h2>
+
+    <div class="feature">
+      <div class="feature-num">01</div>
+      <div class="feature-body">
+        <p class="feature-title">AI item categorization</p>
+        <p>Every deal is auto-classified by Claude into 12 buckets — tools, beauty, food, pet, tech, apparel, etc. Browse "what's on sale in beauty" across every retailer in one tap.</p>
+      </div>
+    </div>
+
+    <div class="feature">
+      <div class="feature-num">02</div>
+      <div class="feature-body">
+        <p class="feature-title">Scan-to-check UPC</p>
+        <p>Point your camera at a price tag — instant haptic feedback for a 1¢ match. Logs the find to your ledger, prefills resale-comp lookups for flippers.</p>
+      </div>
+    </div>
+
+    <div class="feature">
+      <div class="feature-num">03</div>
+      <div class="feature-body">
+        <p class="feature-title">Best time to visit</p>
+        <p>Live foot-traffic forecasts for every store. The app tells you which DG to hit at 7am Tuesday before the markdown shelf gets picked over.</p>
+      </div>
+    </div>
+
+    <div class="feature">
+      <div class="feature-num">04</div>
+      <div class="feature-body">
+        <p class="feature-title">Receipt scanner with cross-store comparison</p>
+        <p>Snap a receipt — Claude Vision parses every line item and shows what you could've saved by buying it elsewhere. Plus referral codes for Fetch + Ibotta to stack rewards on top.</p>
+      </div>
+    </div>
+
+    <div class="feature">
+      <div class="feature-num">05</div>
+      <div class="feature-body">
+        <p class="feature-title">Pair Sync for hunting partners</p>
+        <p>Share watchlist + finds + live store status across two devices in real time. Couples + flipping partners can split the route and never miss a confirmed UPC.</p>
+      </div>
+    </div>
+
+    <div class="feature">
+      <div class="feature-num">06</div>
+      <div class="feature-body">
+        <p class="feature-title">AI resale estimates</p>
+        <p>Pro Mode unlocks Claude-powered eBay sold-range estimates per UPC. "Worth flipping?" answered in 3 seconds before you walk to the register.</p>
+      </div>
+    </div>
+
+    <h2>Stores tracked</h2>
+    <div class="stores">
+      <span class="store-pill">DOLLAR GENERAL</span>
+      <span class="store-pill">DOLLAR TREE</span>
+      <span class="store-pill">FAMILY DOLLAR</span>
+      <span class="store-pill">FIVE BELOW</span>
+      <span class="store-pill">BIG LOTS</span>
+      <span class="store-pill">OLLIE'S</span>
+      <span class="store-pill">WALMART</span>
+      <span class="store-pill">TARGET</span>
+      <span class="store-pill">COSTCO</span>
+      <span class="store-pill">CVS</span>
+      <span class="store-pill">WALGREENS</span>
+      <span class="store-pill">RITE AID</span>
+      <span class="store-pill">KROGER</span>
+      <span class="store-pill">MEIJER</span>
+      <span class="store-pill">ALDI</span>
+      <span class="store-pill">PUBLIX</span>
+      <span class="store-pill">TRADER JOE'S</span>
+      <span class="store-pill">WHOLE FOODS</span>
+      <span class="store-pill">HOME DEPOT</span>
+      <span class="store-pill">LOWE'S</span>
+      <span class="store-pill">MENARDS</span>
+      <span class="store-pill">HARBOR FREIGHT</span>
+      <span class="store-pill">ACE</span>
+      <span class="store-pill">KOHL'S</span>
+      <span class="store-pill">MACY'S</span>
+      <span class="store-pill">JCPENNEY</span>
+      <span class="store-pill">TJ MAXX</span>
+      <span class="store-pill">MARSHALLS</span>
+      <span class="store-pill">HOMEGOODS</span>
+      <span class="store-pill">ROSS</span>
+      <span class="store-pill">BURLINGTON</span>
+      <span class="store-pill">ULTA</span>
+      <span class="store-pill">SEPHORA</span>
+      <span class="store-pill">BATH & BODY WORKS</span>
+      <span class="store-pill">MICHAELS</span>
+      <span class="store-pill">JOANN</span>
+      <span class="store-pill">HOBBY LOBBY</span>
+      <span class="store-pill">BARNES & NOBLE</span>
+      <span class="store-pill">BEST BUY</span>
+      <span class="store-pill">STAPLES</span>
+      <span class="store-pill">PETSMART</span>
+      <span class="store-pill">PETCO</span>
+      <span class="store-pill">DICK'S</span>
+    </div>
+
+    <h2>How we stay free</h2>
+    <p>
+      When you tap "Shop" on a deal and buy from the retailer, we may earn a
+      small commission via affiliate programs (Amazon Associates, Skimlinks).
+      That's it — no subscriptions, no display ads, no data resold to advertisers.
+      Your watchlist, finds, and receipts stay on your device unless you choose
+      to share them.
+    </p>
+
+    <h2>Get the app</h2>
+    <p>
+      We're shipping the iOS App Store + Google Play in the coming weeks.
+      Drop your email above and we'll ping you on launch day.
+    </p>
+
+    <hr class="rule" />
+    <div class="footer">
+      — — — THANK YOU FOR HUNTING — — —<br />
+      © 2026 PENNY HUNTER  ·  pennyhunter.store<br />
+      <a href="/privacy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Service</a><br />
+      <span style="font-size:9px;line-height:1.4;display:inline-block;max-width:480px;margin-top:8px;letter-spacing:1px;">
+        Penny Hunter participates in affiliate programs. When you click through
+        to a retailer and buy, we may earn a small commission at no cost to you.
+        Not affiliated with Dollar General, Walmart, or any retailer mentioned.
+      </span>
+    </div>
+  </article>
+</main>
+
+<!-- Skimlinks affiliate auto-link script -->
+<script type="text/javascript" src="https://s.skimresources.com/js/302076X1790065.skimlinks.js"></script>
 </body>
 </html>

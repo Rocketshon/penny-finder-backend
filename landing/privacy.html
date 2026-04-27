@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Privacy Policy — Penny Hunter</title>
+  <meta name="description" content="What data Penny Hunter collects, why, and how to opt out." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.85em' font-size='80'>1¢</text></svg>" />
+  <link rel="stylesheet" href="/site.css" />
+</head>
+<body>
+<main class="container">
+  <article class="receipt">
+    <a href="/" class="back-link">← Penny Hunter</a>
+    <div class="brand-sm">PRIVACY · POLICY</div>
+    <hr class="rule" />
+
+    <p class="meta-line">EFFECTIVE 2026-04-27 · LAST UPDATED 2026-04-27</p>
+
+    <h2>The short version</h2>
+    <p>
+      Penny Hunter is built to be useful without knowing who you are. We don't
+      ask for your name, email, phone, or address. Your watchlist, finds, and
+      receipts stay on your device unless <em>you</em> turn on Pair Sync to share
+      with one other device. We collect anonymous usage events so we can fix
+      what's broken — you can turn that off any time in Profile.
+    </p>
+
+    <h2>What we collect</h2>
+
+    <h3>1. Usage analytics (PostHog)</h3>
+    <p>
+      Anonymous event counts: app opens, screen views, scans, finds added,
+      outbound retailer clicks. Each event is tagged with a randomly generated
+      device ID, app version, and platform — never your name, email, or
+      precise location. PostHog's IP-derived geolocation is disabled at
+      initialization (<code>disableGeoip: true</code>).
+    </p>
+    <p>
+      <strong>Opt out:</strong> Profile → Privacy → toggle "Usage Analytics" off.
+    </p>
+
+    <h3>2. Crash reporting (Sentry)</h3>
+    <p>
+      When the app crashes, we send the JavaScript error message, stack trace,
+      and a minimal device fingerprint (OS version, app version, release ID)
+      to Sentry. We strip personally identifying information at the SDK level
+      (<code>sendDefaultPii: false</code>). We do not log your watchlist, finds,
+      or any user-entered data in error reports.
+    </p>
+
+    <h3>3. Anonymous crowdsourced finds</h3>
+    <p>
+      When you log a find with a UPC, we send a row to our backend containing
+      <em>only</em>: the UPC, the store ID, the price you paid, whether it's a
+      penny, and a randomly generated client ID. We never send your item names,
+      notes, or anything else from your finds. This data powers the
+      "X hunters confirmed" badges in the penny list.
+    </p>
+    <p>
+      <strong>Opt out:</strong> Profile → Privacy → toggle "Share Anonymous Finds" off.<br />
+      <strong>Retention:</strong> rows older than 90 days are automatically
+      deleted from our database via a daily cron job.
+    </p>
+
+    <h3>4. Pair Sync (only if you enable it)</h3>
+    <p>
+      If you create or join a pair (Profile → Pair Sync), the watchlist + finds
+      + live store status from this device are stored on our backend so the
+      paired device can read them. Access is controlled by an 8-character pair
+      code — anyone with that code can read your pair's data, so don't share it
+      publicly. Stop sharing any time by leaving the pair (data is removed
+      when the pair becomes inactive).
+    </p>
+
+    <h3>5. Receipt photos (optional, on-demand)</h3>
+    <p>
+      If you scan a receipt, the photo is stored locally on your device only.
+      The image is sent to Anthropic (Claude) once for AI parsing into
+      structured items. Anthropic processes the image to return parsed data
+      and does not retain it for training under our API agreement
+      (see <a href="https://www.anthropic.com/legal/privacy">anthropic.com/legal/privacy</a>).
+      The receipt photo is never uploaded to our backend.
+    </p>
+
+    <h3>6. Device permissions</h3>
+    <ul>
+      <li><strong>Camera</strong> — only while you're scanning a barcode or photographing a receipt. Photos are not transmitted except as described above.</li>
+      <li><strong>Location</strong> — only while you're using the app, and only to filter store deals to your zip. Coordinates are stored on-device only and never transmitted to our servers.</li>
+      <li><strong>Notifications</strong> — only used for penny-day reminders and watchlist hits. Opt-out via iOS Settings.</li>
+    </ul>
+
+    <h2>What we do NOT collect</h2>
+    <ul>
+      <li>Your name, email, phone, mailing address, or government IDs</li>
+      <li>Payment information (we never process payments)</li>
+      <li>Your contacts, calendar, photos library, or microphone</li>
+      <li>Precise location coordinates (only zip-level)</li>
+      <li>Item names from your finds (when sharing anonymously — only UPCs)</li>
+      <li>Receipt photos on our servers (only sent to Anthropic for parsing, then discarded)</li>
+    </ul>
+
+    <h2>Third-party services we use</h2>
+    <p>The following services receive limited data as described above:</p>
+    <ul>
+      <li><strong>Supabase</strong> (database, edge functions, realtime) — anonymous finds, pair sync data, briefing cache. <a href="https://supabase.com/privacy">supabase.com/privacy</a></li>
+      <li><strong>PostHog</strong> (analytics) — anonymous usage events. <a href="https://posthog.com/privacy">posthog.com/privacy</a></li>
+      <li><strong>Sentry</strong> (crash reporting) — JS error messages + stack traces. <a href="https://sentry.io/privacy/">sentry.io/privacy</a></li>
+      <li><strong>Anthropic</strong> (AI categorization, receipt OCR, resale estimates) — item names and receipt photos for the duration of the API call. <a href="https://www.anthropic.com/legal/privacy">anthropic.com/legal/privacy</a></li>
+      <li><strong>Skimlinks</strong> (affiliate link tracking) — when you tap "Shop" on a deal, the outbound URL is wrapped through Skimlinks, which records the click for affiliate attribution. They may set cookies on the retailer site. <a href="https://skimlinks.com/privacy/">skimlinks.com/privacy</a></li>
+      <li><strong>BestTime</strong> (busyness forecasts) — chain name + your city/state/zip are sent to BestTime so we can show "best time to visit" data. They do not receive your identity. <a href="https://besttime.app/privacy.html">besttime.app/privacy</a></li>
+      <li><strong>Flipp</strong> (weekly ad data) — your zip code is sent to Flipp's public API to fetch weekly ads for retailers in your area. <a href="https://corp.flipp.com/privacy">corp.flipp.com/privacy</a></li>
+    </ul>
+
+    <h2>Affiliate links + revenue</h2>
+    <p>
+      When you tap "Shop" on a deal, you're redirected to a retailer's website
+      (Amazon, Walmart, Dollar General, etc.). If you make a purchase, Penny
+      Hunter may earn a small commission via Amazon Associates, Skimlinks, or
+      Impact. The commission has no effect on your price and never changes
+      which deals we show or how they're ranked.
+    </p>
+
+    <h2>Children's privacy</h2>
+    <p>
+      Penny Hunter is intended for users 13 and older. We do not knowingly
+      collect data from children under 13. If you believe a child has provided
+      data to us, contact us and we'll remove it.
+    </p>
+
+    <h2>Your rights</h2>
+    <p>
+      You can:
+    </p>
+    <ul>
+      <li>Turn off all analytics (Profile → Privacy → Usage Analytics)</li>
+      <li>Stop sharing anonymous finds (Profile → Privacy → Share Anonymous Finds)</li>
+      <li>Delete the app — all on-device data is removed instantly</li>
+      <li>Leave any active pair from the Pair Sync screen</li>
+      <li>
+        Request deletion of any anonymous-find rows we've collected from your
+        device by emailing privacy@pennyhunter.store with the random client_id
+        from your phone (we'll show you how to find it on request)
+      </li>
+    </ul>
+    <p>
+      Residents of California (CCPA), the EU/UK (GDPR), and Canada (PIPEDA)
+      have additional rights to access, port, or delete data. Email us — we
+      respond within 30 days.
+    </p>
+
+    <h2>Changes to this policy</h2>
+    <p>
+      We'll bump the "Last updated" date at the top and post a notice in the
+      app the next time you open it after a material change. Continued use
+      after the update means you accept the new terms.
+    </p>
+
+    <h2>Contact</h2>
+    <p>
+      Privacy questions: <a href="mailto:privacy@pennyhunter.store">privacy@pennyhunter.store</a><br />
+      Anything else: <a href="mailto:hello@pennyhunter.store">hello@pennyhunter.store</a>
+    </p>
+
+    <hr class="rule" />
+    <div class="footer">
+      © 2026 PENNY HUNTER · pennyhunter.store · <a href="/terms.html">Terms of Service</a>
+    </div>
+  </article>
+</main>
+</body>
+</html>

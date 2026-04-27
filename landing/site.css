@@ -1,0 +1,377 @@
+/* Shared styles for pennyhunter.store landing + privacy + terms.
+ * Receipt-paper aesthetic, matches the in-app theme.
+ */
+
+:root {
+  --paper:      #f6efe2;
+  --paper-deep: #ede5d3;
+  --paper-edge: #d8cdb1;
+  --ink:        #1a1a1a;
+  --ink-mid:    #555;
+  --ink-faint:  #999;
+  --hot:        #d64069;
+  --hot-soft:   #f9d9e5;
+  --stamp:      #4a8b3a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-font-smoothing: antialiased; }
+body {
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.55;
+}
+
+.mono { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+
+.container {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+
+.receipt {
+  background: var(--paper);
+  border: 1.5px solid var(--ink);
+  padding: 36px 28px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.brand {
+  font-size: 38px;
+  font-weight: 900;
+  letter-spacing: 6px;
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+.brand-sm {
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: 4px;
+  text-align: center;
+  margin-bottom: 6px;
+  color: var(--ink);
+}
+
+.back-link {
+  display: inline-block;
+  font-family: ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  font-weight: 800;
+  color: var(--ink-mid);
+  text-decoration: none;
+  margin-bottom: 14px;
+}
+
+.meta {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 11px;
+  color: var(--ink-faint);
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+.meta-line {
+  font-family: ui-monospace, monospace;
+  font-size: 10px;
+  color: var(--ink-faint);
+  letter-spacing: 1.5px;
+  margin-bottom: 18px;
+}
+
+.rule {
+  border: 0;
+  border-top: 1px dashed var(--ink);
+  margin: 24px 0;
+}
+
+.stamp {
+  display: inline-block;
+  border: 2px solid var(--hot);
+  color: var(--hot);
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 2.5px;
+  transform: rotate(-3deg);
+  margin-bottom: 12px;
+}
+
+h1 {
+  font-size: 30px;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+  font-weight: 900;
+  margin-bottom: 14px;
+}
+
+h2 {
+  font-size: 14px;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  font-weight: 800;
+  margin: 32px 0 10px;
+  color: var(--ink);
+}
+
+h3 {
+  font-size: 14px;
+  font-weight: 800;
+  margin: 18px 0 8px;
+  color: var(--ink);
+}
+
+p {
+  font-size: 15px;
+  color: var(--ink-mid);
+  margin-bottom: 12px;
+}
+
+.lead {
+  font-size: 17px;
+  color: var(--ink);
+}
+
+a { color: var(--ink); }
+a:hover { color: var(--hot); }
+
+ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 8px 0 16px;
+}
+
+li {
+  padding: 6px 0 6px 22px;
+  position: relative;
+  font-size: 14px;
+  color: var(--ink-mid);
+}
+
+li::before {
+  content: "·";
+  position: absolute;
+  left: 6px;
+  color: var(--hot);
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 1;
+}
+
+code {
+  font-family: ui-monospace, monospace;
+  font-size: 13px;
+  background: var(--paper-deep);
+  padding: 1px 6px;
+  border-radius: 2px;
+  border: 1px solid var(--paper-edge);
+}
+
+.cta {
+  display: inline-block;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 14px 22px;
+  letter-spacing: 2.5px;
+  font-weight: 900;
+  font-size: 12px;
+  text-decoration: none;
+  border-radius: 2px;
+  margin: 4px 4px 4px 0;
+}
+.cta--hot { background: var(--hot); }
+.cta--ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1.5px solid var(--ink);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 24px;
+  margin: 14px 0;
+}
+.grid p { font-size: 13px; }
+
+.footer {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 10px;
+  color: var(--ink-faint);
+  text-align: center;
+  letter-spacing: 2px;
+  margin-top: 28px;
+}
+.footer a { color: var(--ink-faint); text-decoration: underline; }
+
+.stores {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0 8px;
+}
+.store-pill {
+  font-family: ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 1px;
+  padding: 4px 8px;
+  border: 1px solid var(--paper-edge);
+  background: var(--paper-deep);
+  border-radius: 2px;
+  color: var(--ink-mid);
+}
+
+/* Sample-deal preview cards (landing) */
+.deal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 16px 0;
+}
+.deal-card {
+  background: var(--paper-deep);
+  border: 1px solid var(--paper-edge);
+  border-radius: 4px;
+  padding: 12px 14px;
+}
+.deal-store {
+  font-family: ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: var(--hot);
+  font-weight: 900;
+  margin-bottom: 6px;
+}
+.deal-name {
+  font-size: 14px;
+  color: var(--ink);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.deal-price {
+  font-family: ui-monospace, monospace;
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--ink);
+}
+.deal-was {
+  font-family: ui-monospace, monospace;
+  font-size: 11px;
+  color: var(--ink-faint);
+  text-decoration: line-through;
+  margin-left: 6px;
+}
+.deal-penny {
+  background: var(--hot);
+  color: var(--paper);
+  font-family: ui-monospace, monospace;
+  font-size: 14px;
+  font-weight: 900;
+  padding: 2px 8px;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+/* App store badges */
+.badges {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 20px 0 8px;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 10px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  min-width: 175px;
+  font-family: -apple-system, system-ui, sans-serif;
+}
+.badge-icon { font-size: 22px; line-height: 1; }
+.badge-text { display: flex; flex-direction: column; gap: 1px; }
+.badge-small { font-size: 9px; letter-spacing: 0.4px; opacity: 0.75; text-transform: uppercase; }
+.badge-big { font-size: 15px; font-weight: 700; letter-spacing: -0.2px; }
+.badge--soon { opacity: 0.65; cursor: default; }
+
+/* Email signup form */
+.signup-row {
+  display: flex;
+  gap: 8px;
+  margin: 14px 0;
+  flex-wrap: wrap;
+}
+.signup-row input[type="email"] {
+  flex: 1;
+  min-width: 220px;
+  padding: 12px 14px;
+  border: 1.5px solid var(--ink);
+  background: var(--paper);
+  font-size: 14px;
+  border-radius: 2px;
+  font-family: inherit;
+}
+.signup-row input[type="email"]:focus {
+  outline: 2px solid var(--hot);
+  outline-offset: -1px;
+}
+.signup-row button {
+  padding: 12px 20px;
+  background: var(--hot);
+  color: var(--paper);
+  border: 0;
+  font-weight: 900;
+  letter-spacing: 2px;
+  font-size: 11px;
+  border-radius: 2px;
+  cursor: pointer;
+  font-family: inherit;
+}
+.signup-row button:hover { background: var(--ink); }
+.signup-note {
+  font-size: 11px;
+  color: var(--ink-faint);
+  font-family: ui-monospace, monospace;
+  letter-spacing: 0.5px;
+  margin-top: 4px;
+}
+
+/* Feature ladder */
+.feature {
+  display: flex;
+  gap: 14px;
+  margin: 14px 0;
+  align-items: flex-start;
+}
+.feature-num {
+  font-family: ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 900;
+  color: var(--hot);
+  letter-spacing: 1px;
+  flex-shrink: 0;
+  width: 30px;
+  padding-top: 1px;
+}
+.feature-body p { margin: 0; }
+.feature-title {
+  font-size: 15px;
+  color: var(--ink);
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+@media (max-width: 480px) {
+  .container { padding: 24px 16px 60px; }
+  .receipt { padding: 24px 18px; }
+  .brand { font-size: 30px; letter-spacing: 4px; }
+  h1 { font-size: 24px; }
+  .grid, .deal-grid { grid-template-columns: 1fr; }
+  .badge { min-width: unset; flex: 1; }
+}

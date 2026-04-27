@@ -1,13 +1,14 @@
 """Tag DealItems with a category by calling the Supabase categorize edge
-function (Claude Haiku-backed). Batches in groups of 200 to keep each call
-small + the JSON parse stable.
+function (Claude Haiku-backed). Batches in groups of 200 and dispatches
+batches concurrently (3 in flight) so a 1500-item briefing categorizes
+in ~5s instead of 30s+ of sequential blocking.
 
-Used at the end of `aggregate()` so every emitted briefing has categories
-on every item. Free-tier Haiku cost: ~$0.0004 per 50-item batch, so a
-typical 1500-item briefing costs ~$0.012 to fully categorize.
+Best-effort: on Claude / network failure the items keep `category=None`
+and the in-app fallback (categorize.ts keyword heuristic) takes over.
 """
 from __future__ import annotations
 
+import asyncio
 import os
 from typing import Iterable
 
@@ -23,6 +24,7 @@ ANON_KEY = (
 )
 BATCH_SIZE = 200
 TIMEOUT = 60.0
+MAX_CONCURRENT_BATCHES = 3
 
 VALID_CATEGORIES = {
     "tools", "beauty", "food", "pet", "home", "tech",
@@ -35,14 +37,45 @@ def _chunks(seq: list, size: int) -> Iterable[list]:
         yield seq[i : i + size]
 
 
-def categorize_items(items: list[DealItem]) -> list[DealItem]:
-    """Return a new list with `.category` populated. Items already tagged
-    are left alone. On failure (network / Claude error) returns items
-    unchanged — never raises so the briefing pipeline degrades gracefully."""
+async def _categorize_batch(
+    client: httpx.AsyncClient,
+    sem: asyncio.Semaphore,
+    batch: list[DealItem],
+) -> dict[str, str]:
+    """Send one batch to the edge function. Return id → category for
+    successful matches. Returns {} on any error (best-effort)."""
+    async with sem:
+        names = [it.name[:200] for it in batch]
+        try:
+            r = await client.post(
+                ENDPOINT,
+                json={"items": names},
+                headers={
+                    "apikey": ANON_KEY,
+                    "Authorization": f"Bearer {ANON_KEY}",
+                    "Content-Type": "application/json",
+                },
+                timeout=TIMEOUT,
+            )
+            r.raise_for_status()
+            data = r.json()
+        except (httpx.HTTPError, ValueError):
+            return {}
+
+        cats = data.get("categories", []) or []
+        out: dict[str, str] = {}
+        # Pair items with categories. zip() truncates to the shorter list,
+        # so an under-returned response still tags whatever Claude got to.
+        for it, cat in zip(batch, cats):
+            if isinstance(cat, str) and cat in VALID_CATEGORIES:
+                out[it.id] = cat
+        return out
+
+
+async def categorize_items_async(items: list[DealItem]) -> list[DealItem]:
+    """Async version — preferred. Caller must be inside an event loop."""
     if not items:
         return items
-
-    # Skip categorization if explicitly disabled (CI fast path or local dev)
     if os.environ.get("CATEGORIZE_DISABLED") == "1":
         return items
 
@@ -50,12 +83,58 @@ def categorize_items(items: list[DealItem]) -> list[DealItem]:
     if not to_tag:
         return items
 
+    sem = asyncio.Semaphore(MAX_CONCURRENT_BATCHES)
+    async with httpx.AsyncClient() as client:
+        batch_results = await asyncio.gather(
+            *(
+                _categorize_batch(client, sem, batch)
+                for batch in _chunks(to_tag, BATCH_SIZE)
+            )
+        )
+
+    tagged: dict[str, str] = {}
+    for r in batch_results:
+        tagged.update(r)
+
+    if not tagged:
+        return items
+
+    out: list[DealItem] = []
+    for it in items:
+        if it.id in tagged:
+            out.append(it.model_copy(update={"category": tagged[it.id]}))
+        else:
+            out.append(it)
+    return out
+
+
+def categorize_items(items: list[DealItem]) -> list[DealItem]:
+    """Sync wrapper — runs the async pipeline. Useful for callers outside
+    an event loop. Aggregator code on an active loop should call
+    categorize_items_async() directly to avoid `asyncio.run()` nesting."""
+    if not items:
+        return items
+    try:
+        return asyncio.run(categorize_items_async(items))
+    except RuntimeError:
+        # Already inside a running loop. Fall back to sequential sync calls.
+        return _categorize_items_sync_fallback(items)
+
+
+def _categorize_items_sync_fallback(items: list[DealItem]) -> list[DealItem]:
+    """Sequential sync fallback used only when categorize_items() is
+    accidentally called from an async context (which is itself a bug —
+    the caller should be using categorize_items_async)."""
+    if os.environ.get("CATEGORIZE_DISABLED") == "1":
+        return items
+    to_tag = [it for it in items if not it.category]
+    if not to_tag:
+        return items
     headers = {
         "apikey": ANON_KEY,
         "Authorization": f"Bearer {ANON_KEY}",
         "Content-Type": "application/json",
     }
-
     tagged: dict[str, str] = {}
     with httpx.Client(timeout=TIMEOUT) as client:
         for batch in _chunks(to_tag, BATCH_SIZE):
@@ -65,18 +144,13 @@ def categorize_items(items: list[DealItem]) -> list[DealItem]:
                 r.raise_for_status()
                 data = r.json()
             except (httpx.HTTPError, ValueError):
-                # Skip this batch — leave items uncategorized, app falls back
-                # to the on-device categorize.ts heuristic.
                 continue
-
             cats = data.get("categories", []) or []
             for it, cat in zip(batch, cats):
                 if isinstance(cat, str) and cat in VALID_CATEGORIES:
                     tagged[it.id] = cat
-
     if not tagged:
         return items
-
     out: list[DealItem] = []
     for it in items:
         if it.id in tagged:

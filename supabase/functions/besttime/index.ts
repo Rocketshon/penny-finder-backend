@@ -30,8 +30,11 @@ Deno.serve(async (req: Request) => {
   if (req.method === 'OPTIONS') return new Response(null, { headers: HEADERS, status: 204 });
 
   const url = new URL(req.url);
-  const chain = url.searchParams.get('chain') || '';
-  const address = url.searchParams.get('address') || '';
+  // Cap inputs to prevent pathological URL lengths from flowing into
+  // BestTime + the cache key. 80 chars is more than any chain name; 160
+  // is enough for a city + state + zip.
+  const chain = (url.searchParams.get('chain') || '').slice(0, 80);
+  const address = (url.searchParams.get('address') || '').slice(0, 160);
 
   if (!chain || !address) return j({ error: 'chain and address are required' }, 400);
   if (!BT_KEY) return j({ error: 'BestTime not configured' }, 503);
@@ -79,13 +82,15 @@ Deno.serve(async (req: Request) => {
     // Cache the failure sentinel so unhuntable chains don't burn
     // BestTime quota on every request.
     await putCached(cacheKey, { error: 'no_forecast' }).catch(() => {});
+    // NEVER reflect upstream object keys back to the client — if BestTime
+    // ever returns a payload that includes our API key (defense-in-depth),
+    // we don't want to echo it.
     return j(
       {
         error: 'BestTime non-OK',
-        detail: btJson?.message ?? 'unknown',
-        upstreamStatus: btJson?.status,
-        httpStatus,
-        topKeys: Object.keys(btJson ?? {}),
+        detail: typeof btJson?.message === 'string'
+          ? btJson.message.slice(0, 200)
+          : 'unknown',
       },
       502
     );

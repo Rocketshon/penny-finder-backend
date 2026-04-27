@@ -45,6 +45,11 @@ Deno.serve(async (req: Request) => {
   if (req.method === 'OPTIONS') return new Response(null, { headers: HEADERS, status: 204 });
   if (req.method !== 'POST') return j({ error: 'POST required' }, 405);
 
+  // Rate limit: 100 calls/day per IP (max ~25K items/day per caller).
+  // Protects the Anthropic budget from runaway clients with the anon key.
+  const rl = await checkRateLimit(clientIp(req), 'categorize', 100);
+  if (!rl.ok) return j({ error: 'rate limit exceeded', retry_after_sec: rl.resetIn }, 429);
+
   let body: any;
   try {
     body = await req.json();
@@ -107,4 +112,56 @@ Deno.serve(async (req: Request) => {
 
 function j(body: any, status = 200): Response {
   return new Response(JSON.stringify(body), { headers: HEADERS, status });
+}
+
+// ── Rate limit helper (inlined; see _shared/rate_limit_inline.md) ──
+async function checkRateLimit(
+  ip: string,
+  fn: string,
+  perDayCap: number
+): Promise<{ ok: true } | { ok: false; resetIn: number }> {
+  const SUPABASE_URL = Deno.env.get('SUPABASE_URL') ?? '';
+  const SERVICE_ROLE = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '';
+  if (!SUPABASE_URL || !SERVICE_ROLE) return { ok: true };
+  const bucket = `${fn}:${ip}`;
+  const auth = { apikey: SERVICE_ROLE, Authorization: `Bearer ${SERVICE_ROLE}` };
+  try {
+    const r = await fetch(
+      `${SUPABASE_URL}/rest/v1/edge_rate_limits?bucket=eq.${encodeURIComponent(bucket)}&select=count,window_start`,
+      { headers: auth }
+    );
+    const arr = r.ok ? await r.json() : [];
+    const now = Date.now();
+    const dayMs = 86400000;
+    if (arr[0]) {
+      const age = now - new Date(arr[0].window_start).getTime();
+      if (age < dayMs) {
+        if (arr[0].count >= perDayCap) {
+          return { ok: false, resetIn: Math.ceil((dayMs - age) / 1000) };
+        }
+        await fetch(`${SUPABASE_URL}/rest/v1/edge_rate_limits?bucket=eq.${encodeURIComponent(bucket)}`, {
+          method: 'PATCH',
+          headers: { ...auth, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ count: arr[0].count + 1 }),
+        });
+        return { ok: true };
+      }
+    }
+    await fetch(`${SUPABASE_URL}/rest/v1/edge_rate_limits`, {
+      method: 'POST',
+      headers: { ...auth, 'Content-Type': 'application/json', Prefer: 'resolution=merge-duplicates' },
+      body: JSON.stringify({ bucket, count: 1, window_start: new Date().toISOString() }),
+    });
+    return { ok: true };
+  } catch {
+    return { ok: true };
+  }
+}
+
+function clientIp(req: Request): string {
+  return (
+    req.headers.get('cf-connecting-ip') ||
+    req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+    'unknown'
+  );
 }

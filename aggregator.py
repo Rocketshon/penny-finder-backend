@@ -17,7 +17,7 @@ from datetime import datetime, timezone
 import httpx
 from dateutil.relativedelta import relativedelta
 
-from categorize_client import categorize_items
+from categorize_client import categorize_items, categorize_items_async
 from confidence import boost_highlights, fold_duplicate_notes
 from cross_verify import verify_penny_list
 from headline import compose_headline
@@ -77,47 +77,27 @@ def _infer_kind(mod) -> str:
     return "scraper"
 
 
-def aggregate(results: list[ScrapeResult], penny_list: list[PennyListEntry] | None = None) -> BriefingV1:
-    """Build BriefingV1 from scraper results.
-
-    `penny_list` lets callers pass a post-verified list so confidence boosts
-    reflect catalog hits. When omitted, we use the raw dedup'd community list.
-    """
+def _aggregate_core(
+    results: list[ScrapeResult],
+    penny_list: list[PennyListEntry] | None,
+    all_items: list[DealItem],
+) -> BriefingV1:
+    """Pure-sync portion of aggregate(). Takes already-categorized items."""
     now = datetime.now(timezone.utc)
     week_id, week_of = _iso_week_id(now)
 
     highlights_all: list[Highlight] = []
     penny_all: list[PennyListEntry] = []
-    items_all: list[DealItem] = []
     sources = []
     for r in results:
         highlights_all.extend(r.highlights)
         penny_all.extend(r.penny_items)
-        items_all.extend(getattr(r, "items", []) or [])
         sources.append(r.source)
 
-    # Dedupe all_items by id (multiple scrapers can emit same item; keep first)
-    seen_item_ids: set[str] = set()
-    all_items: list[DealItem] = []
-    for it in items_all:
-        if it.id in seen_item_ids:
-            continue
-        seen_item_ids.add(it.id)
-        all_items.append(it)
-
-    # Tag each item with a Claude-classified category. Drives the in-app
-    # "Browse by Category" tab. Best-effort — on failure items keep
-    # `category=None` and the client falls back to its keyword heuristic.
-    all_items = categorize_items(all_items)
-
     highlights = _dedupe_highlights(highlights_all)
-
     penny = penny_list if penny_list is not None else _dedupe_penny(penny_all)
-
-    # Confidence boost: promote penny_day heat when community + catalog agree.
     highlights = boost_highlights(highlights, penny)
 
-    # Sort: heat desc, then day order, then store
     from schema import HEAT_ORDER, WEEKDAYS
 
     day_rank = {d: i for i, d in enumerate(WEEKDAYS)}
@@ -139,8 +119,42 @@ def aggregate(results: list[ScrapeResult], penny_list: list[PennyListEntry] | No
     )
 
 
+def _dedupe_all_items(results: list[ScrapeResult]) -> list[DealItem]:
+    items_all: list[DealItem] = []
+    for r in results:
+        items_all.extend(getattr(r, "items", []) or [])
+    seen: set[str] = set()
+    out: list[DealItem] = []
+    for it in items_all:
+        if it.id in seen:
+            continue
+        seen.add(it.id)
+        out.append(it)
+    return out
+
+
+def aggregate(results: list[ScrapeResult], penny_list: list[PennyListEntry] | None = None) -> BriefingV1:
+    """Build BriefingV1 from scraper results. Synchronous entry point — uses
+    the sync `categorize_items()` wrapper. Inside an async pipeline (the
+    daily build), prefer `aggregate_async()` to avoid blocking the loop."""
+    all_items = _dedupe_all_items(results)
+    all_items = categorize_items(all_items)
+    return _aggregate_core(results, penny_list, all_items)
+
+
+async def aggregate_async(
+    results: list[ScrapeResult],
+    penny_list: list[PennyListEntry] | None = None,
+) -> BriefingV1:
+    """Async aggregate — fans out categorize batches concurrently inside
+    the existing event loop. Used by build_briefing()."""
+    all_items = _dedupe_all_items(results)
+    all_items = await categorize_items_async(all_items)
+    return _aggregate_core(results, penny_list, all_items)
+
+
 async def build_briefing(scrapers=ALL_SCRAPERS, *, cross_verify: bool = True) -> BriefingV1:
-    """Full pipeline: run scrapers → dedupe → cross-verify → confidence boost."""
+    """Full pipeline: run scrapers → dedupe → cross-verify → categorize → boost."""
     results = await run_all(scrapers)
 
     penny_all: list[PennyListEntry] = []
@@ -152,4 +166,6 @@ async def build_briefing(scrapers=ALL_SCRAPERS, *, cross_verify: bool = True) ->
         # After verification, re-fold in case catalog note merges affected keys.
         penny = fold_duplicate_notes(penny)
 
-    return aggregate(results, penny_list=penny)
+    # We're inside an event loop — use the async aggregator so the
+    # categorize batches run concurrently instead of blocking.
+    return await aggregate_async(results, penny_list=penny)

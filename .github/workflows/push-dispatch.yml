@@ -1,0 +1,40 @@
+name: Push Notification Dispatch
+
+# Invokes the dispatch-push Supabase Edge Function on schedule.
+# - Daily 13:00 UTC = 09:00 ET → watchlist hits
+# - Tuesday 11:00 UTC = 07:00 ET → penny day reminders (handled inside the
+#   function via isTuesday check)
+#
+# Both calls happen daily; the function decides whether to fire each
+# notification type based on day-of-week + last_notified state.
+
+on:
+  schedule:
+    - cron: '0 13 * * *'    # 09:00 ET daily — watchlist + penny-day on Tue
+  workflow_dispatch:
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Invoke dispatch-push edge function
+        env:
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          if [ -z "$SUPABASE_SERVICE_ROLE_KEY" ]; then
+            echo "::error::SUPABASE_SERVICE_ROLE_KEY secret not set"
+            exit 1
+          fi
+          echo "Invoking dispatch-push..."
+          response=$(curl -s -w "\n%{http_code}" -X POST \
+            -H "Authorization: Bearer $SUPABASE_SERVICE_ROLE_KEY" \
+            -H "Content-Type: application/json" \
+            "https://ojfhdbeatbfuiofykopl.supabase.co/functions/v1/dispatch-push")
+          body=$(echo "$response" | sed '$d')
+          status=$(echo "$response" | tail -n 1)
+          echo "Status: $status"
+          echo "Body: $body"
+          if [ "$status" != "200" ]; then
+            echo "::error::Non-200 response: $status"
+            exit 1
+          fi

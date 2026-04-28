@@ -8,7 +8,9 @@ from __future__ import annotations
 from . import (
     barnes_noble,
     camelcamel,
+    coupons_com,
     cvs,
+    dg_coupons,
     dollar_general,
     flipp,
     freebie_guy,
@@ -51,6 +53,8 @@ ALL = [
     kcl,
     penny_pinchin,
     reddit_penny,
+    dg_coupons,
+    coupons_com,
 ]
 
 COMMUNITY = [freebie_guy, kcl, penny_pinchin, reddit_penny]

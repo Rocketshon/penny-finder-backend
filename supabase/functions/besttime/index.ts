@@ -62,11 +62,25 @@ Deno.serve(async (req: Request) => {
     }
   }
 
-  // Fetch fresh
+  // ── Address resolution via OpenStreetMap Nominatim ──────────
+  // BestTime needs a SPECIFIC store street address. The app sends just
+  // city + state + zip, which is too coarse for chains with multiple
+  // nearby stores (Walmart, Target, Kroger, etc.). We use Nominatim
+  // (free, no API key) to resolve the closest store of `chain` near the
+  // user's zip, then forward THAT address to BestTime.
+  //
+  // 2-stage geocoding:
+  //   1. Nominatim resolves the user's zip to a center lat/lng + bbox
+  //   2. Nominatim searches `chain` within that bbox
+  // Result is cached forever per (chain, zip) in besttime_forecasts since
+  // store locations don't move.
+  const resolved = await resolveSpecificStore(chain, address);
+  const venueAddress = resolved ?? address;
+
   const btUrl =
     `${BT_BASE}/forecasts?api_key_private=${encodeURIComponent(BT_KEY)}` +
     `&venue_name=${encodeURIComponent(chain)}` +
-    `&venue_address=${encodeURIComponent(address)}`;
+    `&venue_address=${encodeURIComponent(venueAddress)}`;
 
   let btJson: any;
   let httpStatus = 0;
@@ -104,6 +118,88 @@ Deno.serve(async (req: Request) => {
 
 function j(body: any, status = 200): Response {
   return new Response(JSON.stringify(body), { headers: HEADERS, status });
+}
+
+// ── Address resolver: free OpenStreetMap Nominatim ──────────────
+// Two-stage: zip → bbox → chain in bbox → street address.
+// Returns null on any failure; caller falls back to the original address.
+const NOMINATIM = 'https://nominatim.openstreetmap.org';
+const UA = 'PennyHunter/1.0 hello@pennyhunter.store';
+// Per Nominatim's usage policy: max 1 req/sec, must set User-Agent.
+// Edge functions are cold-started, so two sequential fetches per cache
+// miss is well under their limit.
+
+async function resolveSpecificStore(
+  chain: string,
+  rawAddress: string
+): Promise<string | null> {
+  // Pull a 5-digit zip from the address if present
+  const zipMatch = rawAddress.match(/\b(\d{5})\b/);
+  if (!zipMatch) return null;
+  const zip = zipMatch[1];
+
+  try {
+    // Stage 1: geocode the zip
+    const zipResp = await fetch(
+      `${NOMINATIM}/search?postalcode=${zip}&country=us&format=json&limit=1`,
+      { headers: { 'User-Agent': UA } }
+    );
+    if (!zipResp.ok) return null;
+    const zipResults: any[] = await zipResp.json();
+    if (!zipResults[0]?.lat) return null;
+    const lat = parseFloat(zipResults[0].lat);
+    const lng = parseFloat(zipResults[0].lon);
+    if (!isFinite(lat) || !isFinite(lng)) return null;
+
+    // Stage 2: search chain within ~30 mile bbox around that point
+    // 1° lat ≈ 69 mi, 1° lng ≈ 53 mi at 42°N. 0.45/0.55 ≈ 30mi radius.
+    const dLat = 0.45;
+    const dLng = 0.55;
+    const viewbox = `${lng - dLng},${lat - dLat},${lng + dLng},${lat + dLat}`;
+    const chainResp = await fetch(
+      `${NOMINATIM}/search?q=${encodeURIComponent(chain)}&viewbox=${viewbox}&bounded=1&format=json&limit=5&countrycodes=us`,
+      { headers: { 'User-Agent': UA } }
+    );
+    if (!chainResp.ok) return null;
+    const chainResults: any[] = await chainResp.json();
+
+    // Score each result and pick the best:
+    //   +100 if it's a real shop POI (vs landuse polygon)
+    //   +50 if class is shop
+    //   +25 if display_name starts with a street number
+    //   +importance bonus from Nominatim
+    //   −distance penalty: prefer the one closest to the user's zip centroid
+    const ranked = chainResults
+      .map((r) => {
+        const rLat = parseFloat(r.lat);
+        const rLng = parseFloat(r.lon);
+        // Approx miles using equirectangular projection (good enough for sorting)
+        const dxMi = Math.abs(rLng - lng) * 53;
+        const dyMi = Math.abs(rLat - lat) * 69;
+        const distMi = Math.sqrt(dxMi * dxMi + dyMi * dyMi);
+        return {
+          r,
+          score:
+            (r.addresstype === 'shop' ? 100 : 0) +
+            (r.class === 'shop' ? 50 : 0) +
+            (typeof r.display_name === 'string' && /^\d+,/.test(r.display_name) ? 25 : 0) +
+            (r.importance ? r.importance * 10 : 0) -
+            // 1pt penalty per mile — within 30mi the addresstype/shop bonus
+            // can override; outside, distance dominates.
+            distMi,
+        };
+      })
+      .sort((a, b) => b.score - a.score);
+
+    if (!ranked[0]) return null;
+    const best = ranked[0].r;
+    if (!best?.display_name) return null;
+
+    // Strip the country tail (everything from "United States" onward)
+    return String(best.display_name).replace(/,?\s*United States.*$/i, '').slice(0, 200);
+  } catch {
+    return null;
+  }
 }
 
 type CachedRow = { forecast: any; fetched_at: string };
